@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="shortcut icon" type="image/png" href="Images/logo.png"/>
+		<link rel="shortcut icon" type="image/png" href="Images/icon2.png"/>
 		 <meta charset="UTF-8">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -13,16 +13,43 @@
 
 		<title>Aether</title>
 	</head>
-	<body>
-		<header>
-			<a href="https://mail.google.com">Gmail</a>
-			<a href="https://www.google.com/imghp?hl=en&tab=wi&ei=Ox1NVMXuJYO3yATCjoFA&ved=0CAQQqi4oAg">Images</a>
-			<img id="products" src="products.png"/>
-			<img id="bell" src="bell.png"/>
-			<img id="share" src="share.png"/>
-		</header>
-		<div>
-			<img src="Images/logo7.png"/>
+
+	<script>
+		var colors = ["#383838","white"];
+		var logos = ["Images/logo9.png","Images/logo7.png"]
+		var botonLabel = ["Ligth Mode","Dark Mode"]
+		var colorIndex = 0;
+		function changeColor() {
+			if( colorIndex >= colors.length ) {
+				colorIndex = 0;
+			}
+			document.getElementById("body").style.backgroundColor = colors[colorIndex];
+			document.getElementById("search").style.backgroundColor = colors[colorIndex];
+			document.getElementById("imgLogo").src = logos[colorIndex];
+			document.getElementById("btnColor").innerText = botonLabel[colorIndex];
+
+			colorIndex++;
+		}
+	</script>
+	<header>
+		<img id="bell" src="Images/bell.png"/>
+		<img id="share" src="Images/share.png"/>
+		<img id="products" src="Images/products.png"/>
+		<button id="btnColor" class="btnCol" onclick="changeColor();">Dark Mode</button>
+
+		 
+
+
+
+	</header>
+
+
+    <body id='body'>
+
+		
+		
+		<div id = "search">
+			<img id="imgLogo" src="Images/logo7.png"/>
 			<form name="google" action="#" method="POST"><br>
 					<div class="searchbar">
 					<input class="search_input" type="text" name="" placeholder="Search...">
@@ -31,6 +58,12 @@
 				
 			</form>
 		</div>
+
+
+
+
+
+
 		
 
 		<footer>
