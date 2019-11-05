@@ -43,8 +43,8 @@ public class Website {
 		this.B = B;
 	}
 
-	Website(long l, HashMap B){
-		this.id = generateID();
+	Website(long l, HashMap B, long id){
+		this.id = id;
 		this.rank = 0;
 		this.l = l;
 		this.B = B;
