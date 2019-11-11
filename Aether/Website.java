@@ -50,41 +50,6 @@ public class Website {
 		this.B = B;
 	}
 
-	private long generateID() {
-		long lastID = 0;
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("lastID.txt"));
-			String line = br.readLine();
-			if(isLong(line)) lastID = Long.parseLong(line); 
-			br.close();
-		}
-		catch (FileNotFoundException ex){
-			System.out.println("File lastID.txt is missing. "+ex);
-		}
-		catch (IOException ex){
-			System.out.println("It ocuured an I/O error.");
-		}
-
-		try {
-			FileWriter fw = new FileWriter("lastID.txt");
-			PrintWriter pw = new PrintWriter(fw);
-			pw.println(Long.toString(lastID+1));
-			pw.close();
-		}
-		  catch(IOException ex) {
-			System.out.println("There is no access to the file named lastID.txt");
-		}
-		return lastID+1;
-	}
-
-	private boolean isLong(String s) {
-		try {
-			double d = Long.parseLong(s);
-			return true;
-		} catch (NumberFormatException nfe) {
-			return false;
-		}
-	}
 	
 	//Metodo auxiliar que toma el html del objeto y asigna las propiedades [metaTags, metaDescription, title]
 	private void parseHtml() {
