@@ -8,11 +8,10 @@ public class PageRank {
     private Website[] websites;
     private double d; //Damping Factor / Teleport --Value from 0-1
     private double[][] H;
-    private LinkedList<Double> ranks;
 
     public PageRank(Website[] websites) {
         this.websites = websites;
-        this.d = 0.85;
+        this.d = .85;
         this.H = new double[this.websites.length][this.websites.length];
         this.ranks = this.getRanks();
     }
@@ -66,24 +65,35 @@ public class PageRank {
         // B5.put(3, 1);
 
         // Website[] websites = {new Website(2, B1,0),new Website(2, B2,1),new Website(1, B3,2),new Website(1, B4,3),new Website(1, B5,4)};
-        int init_size = 10000;
-        Website[] websites = new Website[init_size];
-        Random r = new Random();
+    //     int init_size = 10000;
+    //     Website[] websites = new Website[init_size];
+    //     Random r = new Random();
 
-        for(int i=0; i < init_size; i++){
-            HashMap<Integer,Integer> Bi = new HashMap<>();
-            int bSize = r.nextInt(init_size/2);
-            //System.out.println("bsize: "+bSize);
-            for (int j=0; j < bSize; j++) {
-                int id_link_from = r.nextInt(init_size);
-                //System.out.println("id ext: " + id_link_from);
-                Bi.put(id_link_from, 1);
-            }
-            int random_l = r.nextInt(init_size);
-            //System.out.println("random l: "+random_l);
-            websites[i] = new Website(random_l,Bi,i);
-            System.out.println("-----------------------------------");
-        }
+    //     for(int i=0; i < init_size; i++){
+    //         HashMap<Integer,Integer> Bi = new HashMap<>();
+    //         int bSize = r.nextInt(init_size/2);
+    //         //System.out.println("bsize: "+bSize);
+    //         for (int j=0; j < bSize; j++) {
+    //             int id_link_from = r.nextInt(init_size);
+    //             //System.out.println("id ext: " + id_link_from);
+    //             Bi.put(id_link_from, 1);
+    //         }
+    //         int random_l = r.nextInt(init_size);
+    //         //System.out.println("random l: "+random_l);
+    //         websites[i] = new Website(random_l,Bi,i);
+    //         System.out.println("-----------------------------------");
+    //     }
+
+
+
+        HashMap<Integer,Integer> B0 = new HashMap<>(),B1 = new HashMap<>(),B2 = new HashMap<>();
+
+        B0.put(2, 1);
+        B1.put(0, 1);
+        B1.put(2, 1);
+        B2.put(0, 1);
+       
+        Website[] websites = {new Website(2, B0,0),new Website(1, B1,1),new Website(2, B2,2)};
 
 
         PageRank pg = new PageRank(websites);

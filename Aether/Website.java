@@ -37,7 +37,6 @@ public class Website {
 		this.rawHtml = rawHtml;
 		this.parseHtml();
 		this.created = new Date();
-		this.id = generateID();
 		this.rank = 0;
 		this.l = l;
 		this.B = B;

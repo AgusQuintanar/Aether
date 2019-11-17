@@ -1,7 +1,6 @@
 public class Aether {
 
-    private Websites    websites;
-    private SearchPhrase    searchPhrase;
+    private Index   index;
     private Keywords    keywords;
     private SearchResults   searchResults;
     private PageRank    pageRank;
@@ -18,8 +17,8 @@ public class Aether {
 
     }
 
-    private void addAllPages() {
-        long id = 0;
+    private void search(String searchPhrase) {
+        
         
     }
 
