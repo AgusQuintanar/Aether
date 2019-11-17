@@ -4,7 +4,7 @@ public class SearchPhrase {
     private String[] phrase;
 
     public SearchPhrase(String phrase) {
-        this.phrase = phrase.split(" ");
+        this.phrase = phrase.toLowerCase().split(" ");
     }
 
     public LinkedList<String[]> getComninations() {
@@ -52,12 +52,8 @@ public class SearchPhrase {
 
 
 
-
-
-
-
     public static void main(String[] args) {
-        SearchPhrase sf = new SearchPhrase("hola que hace chavo loco al parecer nada xd");
+        SearchPhrase sf = new SearchPhrase("Agus ve a misa");
         LinkedList<String[]> combs = sf.getComninations();
         //System.out.println(combs);
         for (String[] comb : combs) {

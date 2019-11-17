@@ -18,6 +18,7 @@ public class Aether {
     }
 
     private void search(String searchPhrase) {
+        SearchPhrase sf = new SearchPhrase(searchPhrase);
         
         
     }

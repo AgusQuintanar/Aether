@@ -24,10 +24,8 @@ public class PageRank {
                 else this.H[j][i] = 0;
             }
         }
-        this.printMatrix(this.H);
-        this.H = new Matrix(this.H).inverse().getArray();
 
-        this.printMatrix(this.H);
+        this.H = new Matrix(this.H).inverse().getArray();
 
         for (int i=0; i<this.websites.length; i++) {
             double rankI = 0;

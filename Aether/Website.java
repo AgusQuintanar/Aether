@@ -49,6 +49,10 @@ public class Website {
 		this.B = B;
 	}
 
+	Website(String url) {
+		this.url = url;
+	}
+
 	
 	//Metodo auxiliar que toma el html del objeto y asigna las propiedades [metaTags, metaDescription, title]
 	private void parseHtml() {
@@ -76,26 +80,28 @@ public class Website {
 	}
 	
 	public String toString() {
-		String res = "- Website (Object) -\n";
+		// String res = "- Website (Object) -\n";
 		
-		res += "URL: "+this.url+"\n";
+		// res += "URL: "+this.url+"\n";
 		
-		res += "TITLE: "+this.title+"\n";
+		// res += "TITLE: "+this.title+"\n";
 		
-		res += "DESCRIPTION: "+this.metaDescription+"\n";
+		// res += "DESCRIPTION: "+this.metaDescription+"\n";
 		
-		res += "META TAGS: ";
-		for(int i=0; i<this.keywords.length; i++) {
-			res += keywords[i];
-			if(i != this.keywords.length-1) res+= ", ";
-		}
-		res += "\n";
+		// res += "META TAGS: ";
+		// for(int i=0; i<this.keywords.length; i++) {
+		// 	res += keywords[i];
+		// 	if(i != this.keywords.length-1) res+= ", ";
+		// }
+		// res += "\n";
 		
-		res += "VISITORS: "+this.visitors+"\n";
+		// res += "VISITORS: "+this.visitors+"\n";
 		
-		res += "CREATED: "+this.created+"\n";
+		// res += "CREATED: "+this.created+"\n";
 		
-		return res;
+		// return res;
+
+		return this.url;
 	}
 	
 	public int getVisitors() {
