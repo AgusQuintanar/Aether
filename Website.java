@@ -1,6 +1,7 @@
 //Jonathan Chavez A01636160
 //Agustin Quintanar A01636142
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -13,17 +14,18 @@ public class Website {
 				   rawHtml;
 
 	private String[] keywords;
-	
+  
 	private ArrayList<String> linksTo = new ArrayList<String>();
 
 	private int visitors = 0;
 
 	private Date created;
-				 
+
 	private double rank; 
 
 	
 	
+
 	Website(String url, String rawHtml){
 		this.url = url;
 		this.rawHtml = rawHtml;
@@ -56,8 +58,7 @@ public class Website {
 			keywordsClosingTagIndex = i;
 		}
 		this.keywords = rawHtml.substring(keywordsOpeningTagIndex, keywordsClosingTagIndex+1).split(",");
-		
-		
+
 		//Parsing outside links
 		HashSet<String> uniqueLinks = new HashSet<String>();
 		int beginIndex = 0;
@@ -114,7 +115,7 @@ public class Website {
 			if(i != this.linksTo.size()-1) res+= ", ";
 		}
 		res += "\n";
-		
+
 		return res;
 	}
 	
