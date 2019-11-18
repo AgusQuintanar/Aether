@@ -7,7 +7,7 @@ public class SearchPhrase {
         this.phrase = phrase.toLowerCase().split(" ");
     }
 
-    public LinkedList<String[]> getComninations() {
+    public LinkedList<String> getComninations() {
         LinkedList<String[]> combinations = new LinkedList<>();
         if (this.phrase.length <= 7) {
             combinations.add(this.phrase);
@@ -20,10 +20,16 @@ public class SearchPhrase {
             combinations = getComninationsAux(combinations,fragmentedPhrase,0,0,0,0,0,0,0);
             while (word < this.phrase.length) combinations.add(this.phrase[word++].split(" "));
         } 
-        return combinations;
         
-
-
+        LinkedList<String> combinationsString = new LinkedList<>();
+        for (String[] combination : combinations) {
+            String comb = "";
+            for (String word : combination) comb += word + " ";
+            comb = comb.trim();
+            combinationsString.add(comb);
+        }
+        return combinationsString;
+        
     } 
 
     private LinkedList<String[]> getComninationsAux(LinkedList<String[]> combinations, String[] substring, int index, int last, int k, int p, int t, int d, int h) {
@@ -53,15 +59,11 @@ public class SearchPhrase {
 
 
     public static void main(String[] args) {
-        SearchPhrase sf = new SearchPhrase("Agus ve a misa");
-        LinkedList<String[]> combs = sf.getComninations();
+        SearchPhrase sf = new SearchPhrase("Esta es una frase de ejemplo");
+        LinkedList<String> combs = sf.getComninations();
         //System.out.println(combs);
-        for (String[] comb : combs) {
-            for(String word : comb) {
-                System.out.print(word + " ");
-            }
-            System.out.println();
+        for (String comb : combs) {
+            System.out.println(comb);
         }
-        //System.out.println(sf.combinations);
     }
 }

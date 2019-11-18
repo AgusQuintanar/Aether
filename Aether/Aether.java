@@ -2,16 +2,16 @@ import java.util.HashMap;
 
 public class Aether {
 
-    private Index   index;
+    //private Index   index;
     private Keywords    keywords;
     private PageRank    pageRank;
+    private SearchResults   searchResults;
 
     public Aether() {
-        this.index = new Index();
+        super();
+        //this.index = new Index();
         this.keywords = new Keywords();
-        //Parsear paginas
-        this.pageRank = new PageRank();
-
+        //this.pageRank = new PageRank();
     }
 
     private void search(String searchPhrase) {
@@ -31,7 +31,17 @@ public class Aether {
                 }
             }
         }
-        
+        this.searchResults = new SearchResults(websitesFound);
+
+    }
+
+    public static void main(String[] args) {
+        String[] frase = {"Hola","que","hace"};
+        String comb = "";
+        for (String word : frase) comb+=word+" ";
+
+
+        System.out.println(comb.trim());
     }
 
 }

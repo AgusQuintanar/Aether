@@ -36,28 +36,28 @@ public class SearchResults {
 }
 
 class Quicksort {
-    public static <E extends Comparable <E>> void quicksort(E[] datos) {
-        quicksort(datos,0,datos.length-1);
+    public static <E extends Comparable <E>> void quicksort(E[] data) {
+        quicksort(data,0,data.length-1);
     }
 
-    private static <E extends Comparable <E>> void quicksort(E[] datos, int left, int right) {
+    private static <E extends Comparable <E>> void quicksort(E[] data, int left, int right) {
         if (left < right) {
-            int p = particionar(datos, left, right);
-            quicksort(datos,left,p-1);
-            quicksort(datos, p+1, right);
+            int p = partition(data, left, right);
+            quicksort(data,left,p-1);
+            quicksort(data, p+1, right);
         }
     }
 
-    private static <E extends Comparable <E>>int particionar(E[] datos, int left, int right) {
-        E pivote = datos[left];
+    private static <E extends Comparable <E>>int partition(E[] data, int left, int right) {
+        E pivot = data[left];
         int i = left + 1;
 		for(int j = left+1; j<=right; j++) {
-			if (datos[j].compareTo(pivote)<0) {
-				swap(datos,i,j);
+			if (data[j].compareTo(pivot)<0) {
+				swap(data,i,j);
 				i++;
             }
         }
-        swap(datos,left,i-1);
+        swap(data,left,i-1);
 		return i-1;
     }
 
