@@ -13,7 +13,6 @@ public class PageRank {
         this.websites = websites;
         this.d = .85;
         this.H = new double[this.websites.length][this.websites.length];
-        this.ranks = this.getRanks();
     }
 
     public void calculateRanks() {
@@ -43,13 +42,6 @@ public class PageRank {
             } System.out.println();
         }
     }
-
-    public LinkedList<Double> getRanks() {
-        LinkedList<Double> ranksTemp = new LinkedList<>();
-        return ranksTemp;
-    }
-
-
 
     public static void main(String[] args) {
         // HashMap<Integer,Integer> B1 = new HashMap<>(),B2 = new HashMap<>(),B3 = new HashMap<>(),B4 = new HashMap<>(),B5 = new HashMap<>();
