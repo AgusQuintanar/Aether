@@ -45,8 +45,16 @@ div {
 
 }
 
-div img {
+#imgLogo {
 	width: 22%;
+	height: auto;
+	margin:5px;
+	padding-bottom: 3%;
+
+}
+
+#imgLogo_2 {
+	width: 7%;
 	height: auto;
 	margin:5px;
 	padding-bottom: 3%;
@@ -106,6 +114,17 @@ input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
 .searchbar{
     margin-bottom: auto;
     margin-top: auto;
+    height: 60px;
+    background-color: #494d57;
+    border-radius: 30px;
+	padding: 10px;
+	width: 38%;
+}
+
+
+.searchbar_2{
+    margin-bottom: auto;
+    margin-top: 5px;
     height: 60px;
     background-color: #494d57;
     border-radius: 30px;

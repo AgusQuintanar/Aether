@@ -23,6 +23,7 @@ public class PageRank {
         }
         this.printMatrix(this.H);
         this.H = new Matrix(this.H).inverse().getArray();
+        System.out.println("-----------------------------------");
 
         this.printMatrix(this.H);
 
@@ -57,23 +58,24 @@ public class PageRank {
         // B5.put(3, 1);
 
         // Website[] websites = {new Website(2, B1,0),new Website(2, B2,1),new Website(1, B3,2),new Website(1, B4,3),new Website(1, B5,4)};
-        int init_size = 10000;
+        int init_size = 10;
         Website[] websites = new Website[init_size];
         Random r = new Random();
 
         for(int i=0; i < init_size; i++){
             HashMap<Integer,Integer> Bi = new HashMap<>();
-            int bSize = r.nextInt(init_size/2);
+            int bSize = r.nextInt((int)(init_size));
             System.out.println("bsize: "+bSize);
             for (int j=0; j < bSize; j++) {
                 int id_link_from = r.nextInt(init_size);
                 //System.out.println("id ext: " + id_link_from);
                 Bi.put(id_link_from, 1);
             }
-            int random_l = r.nextInt(init_size);
-            //System.out.println("random l: "+random_l);
+            int random_l = r.nextInt((int)(init_size));
+            System.out.println("random l: "+random_l);
             websites[i] = new Website(random_l,Bi,i);
             System.out.println("-----------------------------------");
+            Bi.clear();
         }
 
 

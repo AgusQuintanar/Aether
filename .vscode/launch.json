@@ -1,0 +1,57 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Google2Application<google2>",
+            "request": "launch",
+            "mainClass": "com.google2.Google2Application",
+            "projectName": "google2"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MagicSquareExample",
+            "request": "launch",
+            "mainClass": "Jama.examples.MagicSquareExample"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestMatrix",
+            "request": "launch",
+            "mainClass": "Jama.test.TestMatrix"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-PageRank",
+            "request": "launch",
+            "mainClass": "PageRank"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-PageRank2",
+            "request": "launch",
+            "mainClass": "PageRank2"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SearchPhrase",
+            "request": "launch",
+            "mainClass": "SearchPhrase"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Website",
+            "request": "launch",
+            "mainClass": "Website"
+        }
+    ]
+}
