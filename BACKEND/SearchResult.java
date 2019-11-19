@@ -11,7 +11,7 @@ public class SearchResult implements Comparable<SearchResult>{
         return this.overallRank;
     }
 
-    public Website geWebsite() {
+    public Website getWebsite() {
         return this.website;
     }
 
