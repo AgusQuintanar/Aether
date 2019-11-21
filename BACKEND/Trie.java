@@ -111,12 +111,18 @@ public class Trie {
 
 	public static void main(String[] args) {
 		Trie trie = new Trie();
-		trie.add("perRo");
-		trie.add("1,2,4");
-		trie.add("permiso");
+		trie.add("perro");
+		trie.add("pedigree");
+		trie.add("perros en venta");
+		trie.add("perro chihuahua");
 		trie.add("perros adoptados");
-		trie.add("uvas");
-		trie.add("pescados");
+		trie.add("perro dibujo");
+		trie.add("perro aguayo");
+		trie.add("pug");
+		trie.add("perros pequeños");
+		trie.add("los perros cagan mucho");
+		trie.add("los perros son malos");
+		trie.add("lola la perra");
 		System.out.println(trie.autocomplete("p", 5));
 		System.out.println(trie.search("perro"));
 		System.out.println(trie.autocomplete("peR", 2));
