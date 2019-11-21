@@ -104,7 +104,7 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
 
             this.forEach((keyword, websites) -> {
                 String urlsString = "";
-                for (Website ws : websites) urlsString += ws.getUrl() + ",";
+                for (Website ws : websites) urlsString += ws.getPublicUrl() + ",";
                 pw.println(keyword.trim().toLowerCase()+"---"+urlsString.trim().toLowerCase());
             });
             pw.close();

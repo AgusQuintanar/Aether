@@ -17,11 +17,11 @@ public class PageRank {
         int numOfPages = index.getCount(); //Number of available websites in Index
 
         for (int i=0; i<numOfPages; i++) {
-            System.out.println(websites[i].getUrl()+", linksTo: "+websites[i].getLinksTo());
+            System.out.println(websites[i].getPublicUrl()+", linksTo: "+websites[i].getLinksTo());
             for(int j=0; j<numOfPages; j++) {
 
                 if (i==j) this.H[i][j] = 1; 
-                else if (websites[j].getLinksTo().contains(websites[i].getUrl())) {
+                else if (websites[j].getLinksTo().contains(websites[i].getPublicUrl())) {
                     System.out.println("entro");
                     this.H[i][j] = -this.d/websites[j].getLinksTo().size();
                 }
