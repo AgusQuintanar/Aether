@@ -7,15 +7,14 @@ import java.util.HashSet;
 
 public class Website {
 	
-	private String publicUrl,
-				   privateUrl,
+	private String url,
 				   title,
 				   metaDescription,
 				   rawHtml;
 
 	private String[] keywords;
 	
-	private HashSet<String> linksTo = new HashSet<String>();
+	private ArrayList<String> linksTo = new ArrayList<String>();
 
 	private int visitors = 0;
 
@@ -25,29 +24,15 @@ public class Website {
 
 	
 	
-	Website(String publicUrl, String privateUrl, String rawHtml){
-		this.publicUrl = publicUrl;
-		this.privateUrl = privateUrl;
+	Website(String url, String rawHtml){
+		this.url = url;
 		this.rawHtml = rawHtml;
 		this.parseHtml();
 		this.created = new Date();
 		this.rank = 0;
 	}
 
-	Website(String publicUrl, String privateUrl, String title, String metaDescription, String rawHtml, String[] keywords, 
-	HashSet<String> linksTo, int visitors, Date created, double rank){
-		this.publicUrl = publicUrl;
-		this.privateUrl = privateUrl;
-		this.title = title;
-		this.metaDescription = metaDescription;
-		this.rawHtml = rawHtml;
-		this.keywords = keywords;
-		this.linksTo = linksTo;
-		this.visitors = visitors;
-		this.created = created;
-		this.rank = rank;
-	}
-
+	
 	//Auxiliar method called in constructor that parses the HTML of the object and sets the properties [metaTags, metaDescription, title, outside_links]
 	private void parseHtml() {
 		
@@ -113,34 +98,33 @@ public class Website {
 	}
 	
 	public String toString() {
-		// String res = "- Website (Object) -\n";
+		String res = "- Website (Object) -\n";
 		
-		// res += "publicUrl: "+this.publicUrl+"\n";
-
-		// res += "privateUrl: "+this.privateUrl+"\n";
+		res += "URL: "+this.url+"\n";
 		
-		// res += "TITLE: "+this.title+"\n";
+		res += "TITLE: "+this.title+"\n";
 		
-		// res += "DESCRIPTION: "+this.metaDescription+"\n";
+		res += "DESCRIPTION: "+this.metaDescription+"\n";
 		
-		// res += "META TAGS: ";
-		// for(int i=0; i<this.keywords.length; i++) {
-		// 	res += keywords[i];
-		// 	if(i != this.keywords.length-1) res+= ", ";
-		// }
-		// res += "\n";
+		res += "META TAGS: ";
+		for(int i=0; i<this.keywords.length; i++) {
+			res += keywords[i];
+			if(i != this.keywords.length-1) res+= ", ";
+		}
+		res += "\n";
 		
-		// res += "VISITORS: "+this.visitors+"\n";
+		res += "VISITORS: "+this.visitors+"\n";
 		
-		// res += "CREATED: "+this.created+"\n";
+		res += "CREATED: "+this.created+"\n";
 		
-		// res += "THIS PAGE POINTS TO: ";
-		// for(String pageLinked : this.linksTo) {
-		// 	res += pageLinked;
-		// }
-		// res += "\n";
+		res += "THIS PAGE POINTS TO: ";
+		for(int i=0; i<this.linksTo.size(); i++) {
+			res += this.linksTo.get(i);
+			if(i != this.linksTo.size()-1) res+= ", ";
+		}
+		res += "\n";
 		
-		return this.publicUrl;
+		return res;
 	}
 	
 	public int getVisitors() {
@@ -151,12 +135,8 @@ public class Website {
 		this.visitors++;
 	}
 
-	public String getPublicUrl() {
-		return this.publicUrl;
-	}
-
-	public String getPrivateUrl() {
-		return this.privateUrl;
+	public String getUrl() {
+		return url;
 	}
 
 	public String getTitle() {
@@ -183,23 +163,14 @@ public class Website {
 		return this.keywords;
 	}
 	
-	public HashSet<String> getLinksTo() {
+	public ArrayList<String> getLinksTo() {
 		return this.linksTo;
 	}
 
-	public String getMetaDescription() {
-		return this.metaDescription;
-	}
-
-	public void setMetaDescription(String metaDescription) {
-		this.metaDescription = metaDescription;
-	}
-
 	public static void main(String[] args) {
-		 Website p1 = new Website("https://blogdelperro.com", "hola.com", "<!DOCTYPE html>\n" + 
+		 Website p1 = new Website("https://blogdelperro.com", "<!DOCTYPE html>\n" + 
 		 		"<html lang=\"en\">\n" + 
-				 "\n" +
-				"<title> Titulo de la pagina de perros </title>"+ 
+		 		"\n" + 
 		 		"<head>\n" + 
 		 		"    <meta charset=\"UTF-8\" />\n" + 
 		 		"    <meta name=\"keywords\" content=\"Perros    ,    perros limpios, el blog del perro, el rincón del perro, perros flacos, perros occisos, perros muertos, noticias sobre perros, perros, perruno\" />\n" + 
