@@ -7,7 +7,8 @@ import java.util.HashSet;
 
 public class Website {
 	
-	private String url,
+	private String publicUrl,
+				   privateUrl,
 				   title,
 				   metaDescription,
 				   rawHtml;
@@ -24,17 +25,19 @@ public class Website {
 
 	
 	
-	Website(String url, String rawHtml){
-		this.url = url;
+	Website(String publicUrl, String privateUrl, String rawHtml){
+		this.publicUrl = publicUrl;
+		this.privateUrl = privateUrl;
 		this.rawHtml = rawHtml;
 		this.parseHtml();
 		this.created = new Date();
 		this.rank = 0;
 	}
 
-	Website(String url, String title, String metaDescription, String rawHtml, String[] keywords, 
+	Website(String publicUrl, String privateUrl, String title, String metaDescription, String rawHtml, String[] keywords, 
 	HashSet<String> linksTo, int visitors, Date created, double rank){
-		this.url = url;
+		this.publicUrl = publicUrl;
+		this.privateUrl = privateUrl;
 		this.title = title;
 		this.metaDescription = metaDescription;
 		this.rawHtml = rawHtml;
@@ -112,7 +115,9 @@ public class Website {
 	public String toString() {
 		// String res = "- Website (Object) -\n";
 		
-		// res += "URL: "+this.url+"\n";
+		// res += "publicUrl: "+this.publicUrl+"\n";
+
+		// res += "privateUrl: "+this.privateUrl+"\n";
 		
 		// res += "TITLE: "+this.title+"\n";
 		
@@ -135,7 +140,7 @@ public class Website {
 		// }
 		// res += "\n";
 		
-		return this.url;
+		return this.publicUrl;
 	}
 	
 	public int getVisitors() {
@@ -146,8 +151,12 @@ public class Website {
 		this.visitors++;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getPublicUrl() {
+		return this.publicUrl;
+	}
+
+	public String getPrivateUrl() {
+		return this.privateUrl;
 	}
 
 	public String getTitle() {
@@ -187,7 +196,7 @@ public class Website {
 	}
 
 	public static void main(String[] args) {
-		 Website p1 = new Website("https://blogdelperro.com", "<!DOCTYPE html>\n" + 
+		 Website p1 = new Website("https://blogdelperro.com", "hola.com", "<!DOCTYPE html>\n" + 
 		 		"<html lang=\"en\">\n" + 
 				 "\n" +
 				"<title> Titulo de la pagina de perros </title>"+ 

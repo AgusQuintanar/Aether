@@ -28,10 +28,10 @@ public class Index {
         this.loadMetadata();
     }
 
-    public void addWebsite(String url, String rawHtml) {
-        Website newWebsite = new Website(url, rawHtml);
+    public void addWebsite(String publicUrl, String privateUrl, String rawHtml) {
+        Website newWebsite = new Website(publicUrl, privateUrl, rawHtml);
         this.websites[this.count] = newWebsite; //Adds the website previously created to websites[]
-        this.dns.put(newWebsite.getUrl(), this.count); //Inserts to the DNS the new website and increases the count
+        this.dns.put(newWebsite.getPublicUrl(), this.count); //Inserts to the DNS the new website and increases the count
         File websiteFolder = this.createEmptyWebsiteFiles(rawHtml);
         this.createWebsiteMetadataFile(websiteFolder);
         this.createMetaDescriptionFile(websiteFolder);
@@ -74,7 +74,7 @@ public class Index {
                 //System.out.println("folder: " + websiteFolder);
                 Website newWebsite = this.buildWebsite(websiteFolder); 
                 this.websites[Integer.parseInt(websiteFolder.getName())] = newWebsite; //Adds the website previously created to websites[]
-                this.dns.put(newWebsite.getUrl(), Integer.parseInt(websiteFolder.getName())); //Inserts to the DNS the new website and increases the count
+                this.dns.put(newWebsite.getPublicUrl(), Integer.parseInt(websiteFolder.getName())); //Inserts to the DNS the new website and increases the count
                 this.count++;
             }
         } catch (NullPointerException npe) {
@@ -125,7 +125,7 @@ public class Index {
             FileWriter fw = new FileWriter(metadataPath);
             PrintWriter pw = new PrintWriter(fw);
 
-            pw.println("URL!---!TITLE!---!KEYWORDS!---!LINKS_TO!---!CREATED!---!VISITORS!---!RANKS");
+            pw.println("publicUrl!---!privateUrl!---!TITLE!---!KEYWORDS!---!LINKS_TO!---!CREATED!---!VISITORS!---!RANKS");
 
             Website website = this.websites[Integer.parseInt(websiteFolder.getName())];
 
@@ -135,7 +135,8 @@ public class Index {
             for (String link : website.getLinksTo()) linksToString += link+",";
 
             pw.println(
-                website.getUrl() + "!---!" +
+                website.getPublicUrl() + "!---!" +
+                website.getPrivateUrl() + "!---!" +
                 website.getTitle() + "!---!" +
                 keywordString + "!---!" +
                 linksToString + "!---!" +
@@ -157,23 +158,24 @@ public class Index {
 
         String[] websiteMetadata = this.readWebsiteMetaData(metadataPath);
 
-        String  url = websiteMetadata[0],
-                title = websiteMetadata[1],
+        String  publicUrl = websiteMetadata[0],
+                privateUrl = websiteMetadata[1],
+                title = websiteMetadata[2],
                 rawHtml = getFileContent(websiteFolder.getPath()+"/index.html"),
                 metaDescription = getFileContent(websiteFolder.getPath()+"/METADATA/metaDescription.txt");
         HashSet<String> linksTo = new HashSet<>();
-        for (String link : websiteMetadata[3].split(",")) linksTo.add(link);
-        String[]    keywords = websiteMetadata[2].split(",");
+        for (String link : websiteMetadata[4].split(",")) linksTo.add(link);
+        String[]    keywords = websiteMetadata[3].split(",");
         Date created = new Date();
         try {
-            created = new SimpleDateFormat("dd/MM/yyyy").parse(websiteMetadata[4]);
+            created = new SimpleDateFormat("dd/MM/yyyy").parse(websiteMetadata[5]);
         } catch(ParseException pe) {
             System.out.println("Error while parsing date.");
         }
-        int visitors = Integer.parseInt(websiteMetadata[5]);
-        double  rank = Double.parseDouble(websiteMetadata[6]);
+        int visitors = Integer.parseInt(websiteMetadata[6]);
+        double  rank = Double.parseDouble(websiteMetadata[7]);
 
-        return new Website(url, title, metaDescription, rawHtml, keywords, linksTo, visitors, created, rank);
+        return new Website(publicUrl, privateUrl, title, metaDescription, rawHtml, keywords, linksTo, visitors, created, rank);
         
     }
 
@@ -195,7 +197,7 @@ public class Index {
     }
 
     private String[] readWebsiteMetaData(String pathFile) {
-        String[] websiteMetadata = new String[7];
+        String[] websiteMetadata = new String[8];
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(pathFile));
@@ -261,7 +263,8 @@ public class Index {
 
 
     public static void main(String[] args) {
- 
+        Index index = new Index();
+        index.writeMetadata();
     }
 
 }
