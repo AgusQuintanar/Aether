@@ -19,19 +19,6 @@ public class SearchResults {
 
     public static void main(String[] args) {
 
-        HashMap<Website, Double> wsFound = new HashMap<>();
-        wsFound.put(new Website("Oracle.com"), 52543.34);
-        wsFound.put(new Website("StackOverFlow.com"), 155654.23);
-        wsFound.put(new Website("Java.com"), 543.87);
-        wsFound.put(new Website("w3schools.com"), 3.34);
-        wsFound.put(new Website("geeksforgeeks.com"), 233.74);
-
-        SearchResults srs = new SearchResults(wsFound);
-
-        SearchResult[] orderedResults = srs.getSearchResults();
-
-        for (SearchResult sr : orderedResults) System.out.print(sr + " | ");
-        System.out.println();
     }
 }
 
