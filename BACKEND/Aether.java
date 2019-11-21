@@ -3,13 +3,13 @@ import java.util.HashMap;
 public class Aether {
 
     public Index   index;
-    //public Keywords    keywords;
+    public Keywords    keywords;
     private PageRank    pageRank;
     private SearchResults   searchResults;
 
     public Aether() {
         this.index = new Index();
-        //this.keywords = new Keywords();
+        this.keywords = new Keywords(this.index);
         this.pageRank = new PageRank(this.index.getCount());
     }
 
@@ -19,6 +19,10 @@ public class Aether {
 
     public Index getIndex() {
         return this.index;
+    }
+
+    public Keywords getKeywords() {
+        return this.keywords;
     }
 
     public void updateWebsitesRanks() {
@@ -50,10 +54,11 @@ public class Aether {
 
     public static void main(String[] args) {
         Aether aether = new Aether();
-        aether.updateWebsitesRanks();
+        //aether.updateWebsitesRanks();
 
         //for (int i=0; i<aether.getIndex().getCount(); i++) System.out.println(aether.getIndex().getWebsites()[i].getUrl()+", ");
 
+        System.out.println(aether.getKeywords());
     }
 
 }

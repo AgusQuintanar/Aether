@@ -11,12 +11,44 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
 
     private static final String pathFile = "keywords.txt";
 
-    public Keywords() {
+    public Keywords(Index index) {
         super(100000); //Initial keyword size
-        this.loadKeywords();
+        this.loadKeywords(index);
     }
     
-    public void loadKeywords() {
+    public void loadKeywords(Index index) {
+        this.loadKeywordsFromKeywordsTXT(index);
+        this.loadKeywordsFromWebsites(index);
+    }
+
+    private void loadKeywordsFromWebsites(Index index) {
+        try {
+            for (Website websiteInKeyword : index.getWebsites()) { 
+
+                String keywordsString = "";
+                for (String keyword : websiteInKeyword.getKeywords()) keywordsString+=keyword+",";
+
+                System.out.println("Website: "+websiteInKeyword+", Keywords: "+keywordsString);
+                for (String keyword : websiteInKeyword.getKeywords()) {
+                    if (this.containsKey(keyword)) { //If the keyword is already in Keywords hashmap
+                        LinkedList<Website> oldWebsites = this.get(keyword);
+                        oldWebsites.add(websiteInKeyword);
+                        this.replace(keyword, oldWebsites);
+                    }
+                    else { //If the keyword is not in Keywords hashmap
+                        LinkedList<Website> newKeywordWebsites = new LinkedList<>();
+                        newKeywordWebsites.add(websiteInKeyword);
+                        this.put(keyword, newKeywordWebsites);
+                    }
+                }
+            }
+        } catch (NullPointerException npe) {
+            System.out.println("There are no websites in the Index OR there are no keywords in a website");
+        }
+        
+    }
+
+    private void loadKeywordsFromKeywordsTXT(Index index) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(pathFile));
             String line;
@@ -25,10 +57,9 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
                     String[] data = line.toLowerCase().split("---");
                     LinkedList<Website> kwWebsites = new LinkedList<>(); //websites of each keyword
                     for(String url : data[1].split(",")) {
-                        
-                        kwWebsites.add(I);
+                        int websiteID = index.getDns().get(url);
+                        kwWebsites.add(index.getWebsites()[websiteID]);
                     }
-
                     this.put(data[0], kwWebsites); 
                 } 
             }
@@ -39,6 +70,8 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
         }
         catch (IOException ex){
             System.out.println("There was an I/O error.");
+        } catch (NullPointerException npe) {
+            System.out.println("Sitios no validos encontrados en un keyword");
         }
     }
 
