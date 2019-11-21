@@ -35,7 +35,8 @@ public class Index {
         boolean websiteIsOpen = addNewWebsiteWindow .getWindowIsOpen();
 
         while (websiteIsOpen) {
-            websiteIsOpen = addNewWebsiteWindow .getWindowIsOpen();
+            websiteIsOpen = addNewWebsiteWindow.getWindowIsOpen();
+            System.out.println("hola");
         }
 
         LinkedList<String[]> websitesAdded = addNewWebsiteWindow.getNewWebsitesList();

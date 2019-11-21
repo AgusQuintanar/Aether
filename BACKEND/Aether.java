@@ -65,11 +65,12 @@ public class Aether {
 
         //aether.updateKeywordsFromWebsites();
 
-        System.out.println("Resultados de la busqueda");
-        aether.search("perros comiendo");
+        // System.out.println("Resultados de la busqueda");
+        // aether.search("perros comiendo");
 
-        for (SearchResult searchResult : aether.getSearchResults().getSearchResults()) System.out.println(searchResult + ", ");
+        // for (SearchResult searchResult : aether.getSearchResults().getSearchResults()) System.out.println(searchResult + ", ");
         
+        aether.getIndex().addWebsitesFromWindow();
     }
 
 }
