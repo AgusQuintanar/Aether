@@ -11,7 +11,8 @@ import java.io.IOException;
 import java.io.FileWriter;
 import java.util.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat; 
+import java.text.SimpleDateFormat;
+import java.util.LinkedList; 
 
 public class Index {
 
@@ -26,6 +27,22 @@ public class Index {
         this.dns = new HashMap<>(100000);
         this.websites = new Website[100000];
         this.loadMetadata();
+    }
+
+    public void addWebsitesFromWindow() {
+        AddNewWebsiteWindow addNewWebsiteWindow = new AddNewWebsiteWindow();
+
+        boolean websiteIsOpen = addNewWebsiteWindow .getWindowIsOpen();
+
+        while (websiteIsOpen) {
+            websiteIsOpen = addNewWebsiteWindow .getWindowIsOpen();
+        }
+
+        LinkedList<String[]> websitesAdded = addNewWebsiteWindow.getNewWebsitesList();
+
+        for (String[] newWebsite : websitesAdded) {
+            this.addWebsite(newWebsite[0],newWebsite[1],newWebsite[2]);
+        }
     }
 
     public void addWebsite(String publicUrl, String privateUrl, String rawHtml) {

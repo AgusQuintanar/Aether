@@ -12,8 +12,6 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 
-
-
 public class AddNewWebsiteWindow extends JFrame {
 
     private ControlPanel controlPanel;
@@ -30,23 +28,36 @@ public class AddNewWebsiteWindow extends JFrame {
         this.setVisible(true);
     }
 
+    public boolean getWindowIsOpen() {
+        return controlPanel.getWindowIsOpen();
+    }
+
     public LinkedList<String[]> getNewWebsitesList() {
         return this.controlPanel.getNewWebsitesList();
+    }
+
+    public static void main(String[] args) {
+ 
+
     }
 
 }
 
 class InputPanel extends JPanel{
     private JTextArea rawHtmlTextArea;
-    private JTextField urlTextField;
+    private JTextField publicUrlTextField,
+                       privateUrlTextField;
 
     public InputPanel() {
         super();
         this.setPreferredSize(new Dimension(800,500));
         this.rawHtmlTextArea = new JTextArea(50,50);
-        this.urlTextField = new JTextField(50);
-        this.add(new JLabel("Website's URL"));
-        this.add(this.urlTextField);
+        this.publicUrlTextField = new JTextField(50);
+        this.privateUrlTextField = new JTextField(50);
+        this.add(new JLabel("Website's Public Url"));
+        this.add(this.publicUrlTextField);
+        this.add(new JLabel("Website's Private Url"));
+        this.add(this.privateUrlTextField);
         this.add(new JLabel("Website's RawHtml"));
         this.add(this.rawHtmlTextArea);
     }
@@ -59,16 +70,24 @@ class InputPanel extends JPanel{
         return this.rawHtmlTextArea.getText();
     }
 
-    public String getTextUrlTextField() {
-        return this.urlTextField.getText();
+    public String getTextPublicUrlTextField() {
+        return this.publicUrlTextField.getText();
+    }
+
+    public String getTextPrivateUrlTextField() {
+        return this.privateUrlTextField.getText();
     }
 
     public void setTextRawHtmlTextArea(String newRawHtml) {
         this.rawHtmlTextArea.setText(newRawHtml);
     } 
 
-    public void setTextUrlTextField(String newUrl) {
-        this.urlTextField.setText(newUrl);
+    public void setTextPublicUrlTextField(String newPublicUrl) {
+        this.publicUrlTextField.setText(newPublicUrl);
+    }
+
+    public void setTextPrivateUrlTextField(String newPrivateUrl) {
+        this.privateUrlTextField.setText(newPrivateUrl);
     }
 }
 
@@ -80,12 +99,15 @@ class ControlPanel extends JPanel{
 
     private LinkedList<String[]> newWebsitesList;
 
+    private boolean windowIsOpen;
+
 
     public ControlPanel(InputPanel inputPanel, AddNewWebsiteWindow addNewWebsiteWindow) {
         super();
         this.setPreferredSize(new Dimension(800,200));
         this.inputPanel = inputPanel;
         this.newWebsitesList = new LinkedList<>();
+        this.windowIsOpen = true;
 
         this.addAnotherWebsiteButton = new JButton("Add another Website");
         this.addAnotherWebsiteButton.addActionListener(new ActionListener(){
@@ -93,12 +115,16 @@ class ControlPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
                 try {
-                    if (inputPanel.getTextRawHtmlTextArea().length() > 0 && inputPanel.getTextUrlTextField().length()>0) {
-                        String[] newWebsite = {inputPanel.getTextUrlTextField(),inputPanel.getTextRawHtmlTextArea()};
+                    String publicUrl = inputPanel.getTextPublicUrlTextField(),
+                           privateUrl = inputPanel.getTextPrivateUrlTextField(),
+                           rawHtml = inputPanel.getTextRawHtmlTextArea();
+                    if (rawHtml.length() > 0 && publicUrl.length()>0 && privateUrl.length()>0) {
+                        String[] newWebsite = {publicUrl,privateUrl,rawHtml};
                         newWebsitesList.add(newWebsite);
                         JOptionPane.showMessageDialog(null, "Website added succesfully.");
                         inputPanel.setTextRawHtmlTextArea("");
-                        inputPanel.setTextUrlTextField("");
+                        inputPanel.setTextPublicUrlTextField("");
+                        inputPanel.setTextPrivateUrlTextField("");
                     } else {
                         JOptionPane.showMessageDialog(null, "Invalid url or raw html.");
                     }
@@ -106,7 +132,7 @@ class ControlPanel extends JPanel{
                     JOptionPane.showMessageDialog(null, "Invalid url or raw html.");
                     System.out.println("Null value found in either rawHtml or url");
                 }
-			
+		
 			}
 		});
 
@@ -115,6 +141,7 @@ class ControlPanel extends JPanel{
         this.finishButton.addActionListener(new ActionListener() {
             @Override
 			public void actionPerformed(ActionEvent e) {
+                windowIsOpen = false;
                 addNewWebsiteWindow.dispose();
             }
         });
@@ -130,6 +157,10 @@ class ControlPanel extends JPanel{
 
     public LinkedList<String[]> getNewWebsitesList() {
         return this.newWebsitesList;
+    }
+
+    public boolean getWindowIsOpen() {
+        return this.windowIsOpen;
     }
 }
 
