@@ -1,7 +1,6 @@
 //Jonathan Chavez A01636160
 //Agustin Quintanar A01636142
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -14,18 +13,17 @@ public class Website {
 				   rawHtml;
 
 	private String[] keywords;
-  
+	
 	private ArrayList<String> linksTo = new ArrayList<String>();
 
 	private int visitors = 0;
 
 	private Date created;
-
+				 
 	private double rank; 
 
 	
 	
-
 	Website(String url, String rawHtml){
 		this.url = url;
 		this.rawHtml = rawHtml;
@@ -58,22 +56,31 @@ public class Website {
 			keywordsClosingTagIndex = i;
 		}
 		this.keywords = rawHtml.substring(keywordsOpeningTagIndex, keywordsClosingTagIndex+1).split(",");
-
+		for(int i=0; i<keywords.length; i++) {
+			this.keywords[i] = this.keywords[i].toLowerCase().trim();
+		}
+		
+		
 		//Parsing outside links
 		HashSet<String> uniqueLinks = new HashSet<String>();
 		int beginIndex = 0;
 		
 		while(beginIndex != -1) {
 			int linkOpeningTagIndex = this.rawHtml.indexOf("<a href=\"", beginIndex);
+			if(linkOpeningTagIndex == -1) {
+				return;
+			}
+			linkOpeningTagIndex = this.rawHtml.indexOf(">", linkOpeningTagIndex+1);
+			
 			
 			if(linkOpeningTagIndex == -1) {
-				break;
+				return;
 			} else {
-				linkOpeningTagIndex += 9; // Adds the size of "<a href=" string
+				linkOpeningTagIndex += 1; // Adds the size of ">" string
 			}
-			int linkClosingTagIndex = this.rawHtml.indexOf("\"", linkOpeningTagIndex);
-		
-			beginIndex = linkClosingTagIndex;
+			
+			int linkClosingTagIndex = this.rawHtml.indexOf("<", linkOpeningTagIndex);
+			beginIndex = linkOpeningTagIndex+1;
 			
 			//Trims subpages and only leaves domain name
 			String link = rawHtml.substring(linkOpeningTagIndex, linkClosingTagIndex);
@@ -81,6 +88,7 @@ public class Website {
 			if(idxFirstSlash != -1) {
 				link = link.substring(0, idxFirstSlash);
 			}
+			link = link.toLowerCase().trim();
 			
 			if(!uniqueLinks.contains(link)) {
 				uniqueLinks.add(link);
@@ -90,24 +98,24 @@ public class Website {
 	}
 	
 	public String toString() {
-		// String res = "- Website (Object) -\n";
+		String res = "- Website (Object) -\n";
 		
-		// res += "URL: "+this.url+"\n";
+		res += "URL: "+this.url+"\n";
 		
-		// res += "TITLE: "+this.title+"\n";
+		res += "TITLE: "+this.title+"\n";
 		
-		// res += "DESCRIPTION: "+this.metaDescription+"\n";
+		res += "DESCRIPTION: "+this.metaDescription+"\n";
 		
-		// res += "META TAGS: ";
-		// for(int i=0; i<this.keywords.length; i++) {
-		// 	res += keywords[i];
-		// 	if(i != this.keywords.length-1) res+= ", ";
-		// }
-		// res += "\n";
+		res += "META TAGS: ";
+		for(int i=0; i<this.keywords.length; i++) {
+			res += keywords[i];
+			if(i != this.keywords.length-1) res+= ", ";
+		}
+		res += "\n";
 		
-		// res += "VISITORS: "+this.visitors+"\n";
+		res += "VISITORS: "+this.visitors+"\n";
 		
-		// res += "CREATED: "+this.created+"\n";
+		res += "CREATED: "+this.created+"\n";
 		
 		res += "THIS PAGE POINTS TO: ";
 		for(int i=0; i<this.linksTo.size(); i++) {
@@ -115,7 +123,7 @@ public class Website {
 			if(i != this.linksTo.size()-1) res+= ", ";
 		}
 		res += "\n";
-
+		
 		return res;
 	}
 	
@@ -160,12 +168,54 @@ public class Website {
 	}
 
 	public static void main(String[] args) {
-		 Website trivago = new Website("trivago.com", "<html><head><title>Trivago -  El mejor lugar para tu viaje</title><meta charset=\"UTF-8\">\n" + 
-		 		"  <meta name=\"description\" content=\"Free Web tutorials\">\n" + 
-		 		"  <meta name=\"keywords\" content=\"HTML,CSS,XML,JavaScript\">\n" + 
-		 		"  <meta name=\"author\" content=\"John Doe\">\n" + 
-		 		"  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"></head><body><h1>Encuentra hoteles <a href=\"https://hoteles.com\">aquí</a> y <a href=\"https://hola.com\"></a>allá <a href=\"https://hola.com/caca\"></a></h1></body></html>");
-		 System.out.println(trivago);
+		 Website p1 = new Website("https://blogdelperro.com", "<!DOCTYPE html>\n" + 
+		 		"<html lang=\"en\">\n" + 
+		 		"\n" + 
+		 		"<head>\n" + 
+		 		"    <meta charset=\"UTF-8\" />\n" + 
+		 		"    <meta name=\"keywords\" content=\"Perros    ,    perros limpios, el blog del perro, el rincón del perro, perros flacos, perros occisos, perros muertos, noticias sobre perros, perros, perruno\" />\n" + 
+		 		"    <meta name=\"description\" content=\"Lo mejor de las noticias matutinas, entérate del chisme en la ciudad, vive, disfruta. Conéctate con tu comunidad a través del blog del perro.\" />\n" + 
+		 		"    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n" + 
+		 		"    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\" />\n" + 
+		 		"    <style>\n" + 
+		 		"        body {\n" + 
+		 		"            background: rgb(80, 67, 67);\n" + 
+		 		"            color: white;\n" + 
+		 		"            font-family: 'Times New Roman', Times, serif;\n" + 
+		 		"        }\n" + 
+		 		"        \n" + 
+		 		"        a {\n" + 
+		 		"            color: lightpink;\n" + 
+		 		"        }\n" + 
+		 		"    </style>\n" + 
+		 		"    <title></title>\n" + 
+		 		"</head>\n" + 
+		 		"\n" + 
+		 		"<body>\n" + 
+		 		"    <div>\n" + 
+		 		"        <h1>Perros enkuerados</h1>\n" + 
+		 		"        <section>\n" + 
+		 		"            <div>\n" + 
+		 		"                <p>Mira lo que los perros no quieren que veas</p>\n" + 
+		 		"                <ol>\n" + 
+		 		"                    <li>\n" + 
+		 		"                        <a href=\"../Comida canina/index.html\">https://comida.net</a\n" + 
+		 		"              >\n" + 
+		 		"            </li>\n" + 
+		 		"            <li>\n" + 
+		 		"              <a href=\"../El rincón de Guauf/index.html\">https://rincondelguauf.com</a>\n" + 
+		 		"                    </li>\n" + 
+		 		"                    <li>\n" + 
+		 		"                        <a href=\"../Perros locos/index.html\">https://perroslocos.com</a>\n" + 
+		 		"                    </li>\n" + 
+		 		"                </ol>\n" + 
+		 		"            </div>\n" + 
+		 		"        </section>\n" + 
+		 		"    </div>\n" + 
+		 		"</body>\n" + 
+		 		"\n" + 
+		 		"</html>");
+		 System.out.println(p1);
 	}
 	
 	
