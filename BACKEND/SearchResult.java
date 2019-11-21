@@ -22,6 +22,6 @@ public class SearchResult implements Comparable<SearchResult>{
     }
 
     public String toString() {
-        return this.website.getUrl();
+        return this.website.getPublicUrl();
     }
 }
