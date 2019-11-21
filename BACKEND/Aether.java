@@ -2,46 +2,56 @@ import java.util.HashMap;
 
 public class Aether {
 
-    //private Index   index;
-    private Keywords    keywords;
+    public Index   index;
+    //public Keywords    keywords;
     private PageRank    pageRank;
     private SearchResults   searchResults;
 
     public Aether() {
-        super();
-        //this.index = new Index();
-        this.keywords = new Keywords();
-        //this.pageRank = new PageRank();
+        this.index = new Index();
+        //this.keywords = new Keywords();
+        this.pageRank = new PageRank(this.index.getCount());
     }
 
-    private void search(String searchPhrase) {
-        SearchPhrase sf = new SearchPhrase(searchPhrase);
-        HashMap<Website, Double> websitesFound = new HashMap<>();
+    // public Keywords getKeywords() {
+    //     return this.keywords;
+    // }
+
+    public Index getIndex() {
+        return this.index;
+    }
+
+    public void updateWebsitesRanks() {
+        Website[] websitesWithNewRanks = this.pageRank.calculateRanks(this.index);
+        this.index.setWebsites(websitesWithNewRanks);
+        this.index.writeMetadata();
+    }
+
+    // private void search(String searchPhrase) {
+    //     SearchPhrase sf = new SearchPhrase(searchPhrase);
+    //     HashMap<Website, Double> websitesFound = new HashMap<>();
         
-        for (String comb : sf.getComninations()) {
-            if (this.keywords.containsKey(comb)) {
-                for (Website wsFound : this.keywords.get(comb)) {
-                    if (websitesFound.containsKey(wsFound)) {
-                        double oldRank = websitesFound.get(wsFound);
-                        websitesFound.replace(wsFound, oldRank, 2*oldRank);
-                    }
-                    else {
-                        websitesFound.put(wsFound, Math.pow(2,comb.length())*(0.85*wsFound.getRank()+0.15*wsFound.getVisitors()));
-                    }
-                }
-            }
-        }
-        this.searchResults = new SearchResults(websitesFound);
+    //     for (String comb : sf.getComninations()) {
+    //         if (this.keywords.containsKey(comb)) {
+    //             for (Website wsFound : this.keywords.get(comb)) {
+    //                 if (websitesFound.containsKey(wsFound)) {
+    //                     double oldRank = websitesFound.get(wsFound);
+    //                     websitesFound.replace(wsFound, oldRank, 2*oldRank);
+    //                 }
+    //                 else {
+    //                     websitesFound.put(wsFound, Math.pow(2,comb.length())*(0.85*wsFound.getRank()+0.15*wsFound.getVisitors()));
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     this.searchResults = new SearchResults(websitesFound);
 
-    }
+    // }
 
     public static void main(String[] args) {
-        String[] frase = {"Hola","que","hace"};
-        String comb = "";
-        for (String word : frase) comb+=word+" ";
+        Aether aether = new Aether();
+        aether.updateWebsitesRanks();
 
-
-        System.out.println(comb.trim());
     }
 
 }

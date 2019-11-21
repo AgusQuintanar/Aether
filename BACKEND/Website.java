@@ -14,7 +14,7 @@ public class Website {
 
 	private String[] keywords;
 	
-	private ArrayList<String> linksTo = new ArrayList<String>();
+	private HashSet<String> linksTo = new HashSet<String>();
 
 	private int visitors = 0;
 
@@ -33,7 +33,7 @@ public class Website {
 	}
 
 	Website(String url, String title, String metaDescription, String rawHtml, String[] keywords, 
-	ArrayList<String> linksTo, int visitors, Date created, double rank){
+	HashSet<String> linksTo, int visitors, Date created, double rank){
 		this.url = url;
 		this.title = title;
 		this.metaDescription = metaDescription;
@@ -45,7 +45,6 @@ public class Website {
 		this.rank = rank;
 	}
 
-	
 	//Auxiliar method called in constructor that parses the HTML of the object and sets the properties [metaTags, metaDescription, title, outside_links]
 	private void parseHtml() {
 		
@@ -131,9 +130,8 @@ public class Website {
 		res += "CREATED: "+this.created+"\n";
 		
 		res += "THIS PAGE POINTS TO: ";
-		for(int i=0; i<this.linksTo.size(); i++) {
-			res += this.linksTo.get(i);
-			if(i != this.linksTo.size()-1) res+= ", ";
+		for(String pageLinked : this.linksTo) {
+			res += pageLinked;
 		}
 		res += "\n";
 		
@@ -176,7 +174,7 @@ public class Website {
 		return this.keywords;
 	}
 	
-	public ArrayList<String> getLinksTo() {
+	public HashSet<String> getLinksTo() {
 		return this.linksTo;
 	}
 
@@ -191,7 +189,8 @@ public class Website {
 	public static void main(String[] args) {
 		 Website p1 = new Website("https://blogdelperro.com", "<!DOCTYPE html>\n" + 
 		 		"<html lang=\"en\">\n" + 
-		 		"\n" + 
+				 "\n" +
+				"<title> Titulo de la pagina de perros </title>"+ 
 		 		"<head>\n" + 
 		 		"    <meta charset=\"UTF-8\" />\n" + 
 		 		"    <meta name=\"keywords\" content=\"Perros    ,    perros limpios, el blog del perro, el rincón del perro, perros flacos, perros occisos, perros muertos, noticias sobre perros, perros, perruno\" />\n" + 

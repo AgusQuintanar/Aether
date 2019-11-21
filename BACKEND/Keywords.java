@@ -12,23 +12,22 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
     private static final String pathFile = "keywords.txt";
 
     public Keywords() {
-        super(1000);
+        super(100000); //Initial keyword size
         this.loadKeywords();
     }
-
+    
     public void loadKeywords() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(pathFile));
             String line;
             while((line = br.readLine()) != null){
                 if (line.length() > 0) {
-                    System.out.println(line);
                     String[] data = line.toLowerCase().split("---");
-                    for(String e : data) System.out.println(e);
-                    System.out.println("len: "+data.length);
-                    LinkedList<Website> kwWebsites = new LinkedList<>();
-                    // for(String url : data[1].split(",")) kwWebsites.add(Index.get(url));
-                    for(String url : data[1].split(",")) kwWebsites.add(new Website(url));
+                    LinkedList<Website> kwWebsites = new LinkedList<>(); //websites of each keyword
+                    for(String url : data[1].split(",")) {
+                        
+                        kwWebsites.add(I);
+                    }
 
                     this.put(data[0], kwWebsites); 
                 } 
@@ -62,14 +61,7 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
         }
     }
     public static void main(String[] args) {
-        Keywords kw = new Keywords();
-        System.out.println(kw);
-
-        LinkedList<Website> ws = new LinkedList<>();
-        ws.add(new Website("java.com"));
-        kw.put("y",ws);
-
-        kw.writeKeywords();
+       
     }
 
 

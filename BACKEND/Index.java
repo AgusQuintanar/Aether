@@ -3,6 +3,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
@@ -15,7 +16,7 @@ import java.text.SimpleDateFormat;
 public class Index {
 
     private Website[] websites;
-    private int count;
+    private int count; 
     private HashMap<String, Integer> dns;
 
     private final String websitesPath = "../WEBSITES";
@@ -25,33 +26,68 @@ public class Index {
         this.dns = new HashMap<>(100000);
         this.websites = new Website[100000];
         this.loadMetadata();
+    }
+
+    public void addWebsite(String url, String rawHtml) {
+        Website newWebsite = new Website(url, rawHtml);
+        this.websites[this.count] = newWebsite; //Adds the website previously created to websites[]
+        this.dns.put(newWebsite.getUrl(), this.count); //Inserts to the DNS the new website and increases the count
+        File websiteFolder = this.createEmptyWebsiteFiles(rawHtml);
+        this.createWebsiteMetadataFile(websiteFolder);
+        this.createMetaDescriptionFile(websiteFolder);
+        this.count++;
+    }
+
+    public File createEmptyWebsiteFiles(String rawHtml) {
+        String newWebsiteFolderPath = websitesPath+"/"+Integer.toString(this.count),
+                newWebsiteMetadataFolderPath = newWebsiteFolderPath + "/METADATA";
+
+        File newWebsiteFolder = new File(newWebsiteFolderPath);
+        newWebsiteFolder.mkdirs(); //Creates empty website folder 
+        this.writeRawHTML(rawHtml, newWebsiteFolderPath+"/index.html");
+
+        new File(newWebsiteMetadataFolderPath).mkdirs();
+
+        return newWebsiteFolder;
 
     }
 
+    public boolean writeRawHTML(String rawHtml, String htmlFilePath) {
+        try {
+            FileWriter fw = new FileWriter(htmlFilePath);
+            PrintWriter pw = new PrintWriter(fw);
+            pw.println(rawHtml);
+            pw.close();
+            return true;
+        }
+        catch(IOException ex) {
+            System.out.println(htmlFilePath+" can not be accessed.");
+        }
+        return false;
+    }
 
     public void loadMetadata() {
-
         try{
             File[] websitesDirectory = new File(this.websitesPath).listFiles(File::isDirectory); //Array of websites directories
 
-
             for (File websiteFolder : websitesDirectory) { 
-                System.out.println("folder: " + websiteFolder);
+                //System.out.println("folder: " + websiteFolder);
                 Website newWebsite = this.buildWebsite(websiteFolder); 
-                this.websites[this.count] = newWebsite; //Adds the website previously created to websites[]
-                this.dns.put(newWebsite.getUrl(), this.count++); //Inserts to the DNS the new website and increases the count
+                this.websites[Integer.parseInt(websiteFolder.getName())] = newWebsite; //Adds the website previously created to websites[]
+                this.dns.put(newWebsite.getUrl(), Integer.parseInt(websiteFolder.getName())); //Inserts to the DNS the new website and increases the count
+                this.count++;
             }
         } catch (NullPointerException npe) {
-
+            System.out.println("Null value found while loading metadata.");
         }
         
     }
 
-    public void writeMetadata() {
+    public void writeMetadata() { 
         File[] websitesDirectory = new File(this.websitesPath).listFiles(File::isDirectory);
 
         for (File websiteFolder : websitesDirectory) {
-            System.out.println("folderPro: " + websiteFolder);
+            //System.out.println("folderPro: " + websiteFolder);
             try {
                 this.createWebsiteMetadataFile(websiteFolder);
                 this.createMetaDescriptionFile(websiteFolder);
@@ -69,7 +105,7 @@ public class Index {
             FileWriter fw = new FileWriter(metaDescriptionPath);
             PrintWriter pw = new PrintWriter(fw);
 
-            System.out.println("index Website: "+Integer.parseInt(websiteFolder.getName()));
+            //System.out.println("index Website: "+Integer.parseInt(websiteFolder.getName()));
             Website website = this.websites[Integer.parseInt(websiteFolder.getName())];
 
             pw.println(website.getMetaDescription());
@@ -125,7 +161,7 @@ public class Index {
                 title = websiteMetadata[1],
                 rawHtml = getFileContent(websiteFolder.getPath()+"/index.html"),
                 metaDescription = getFileContent(websiteFolder.getPath()+"/METADATA/metaDescription.txt");
-        ArrayList<String> linksTo = new ArrayList<>();
+        HashSet<String> linksTo = new HashSet<>();
         for (String link : websiteMetadata[3].split(",")) linksTo.add(link);
         String[]    keywords = websiteMetadata[2].split(",");
         Date created = new Date();
@@ -214,27 +250,18 @@ public class Index {
         return this.dns;
     }
 
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setWebsites(Website[] websites) {
+        this.websites = websites;
+    }
+
 
 
     public static void main(String[] args) {
-        Index index = new Index();
-        index.loadMetadata();
-
-        System.out.println(index.getCount());
-
-        System.out.println(index.getWebsites());
-
-        for (int i=0; i<index.getCount(); i++) {
-            System.out.println(index.getWebsites()[i]);
-            index.getWebsites()[i].setRank(25.0+i);
-            index.getWebsites()[i].setMetaDescription("Nueva meta description " + Integer.toString(i));
-            System.out.println("---------------------------------------");
-        }
-
-        System.out.println("dns: "+index.getDns());
-
-        index.writeMetadata();
-
+ 
     }
 
 }
