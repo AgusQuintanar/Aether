@@ -52,6 +52,8 @@ public class Aether {
         Aether aether = new Aether();
         aether.updateWebsitesRanks();
 
+        //for (int i=0; i<aether.getIndex().getCount(); i++) System.out.println(aether.getIndex().getWebsites()[i].getUrl()+", ");
+
     }
 
 }

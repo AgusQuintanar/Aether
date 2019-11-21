@@ -33,12 +33,14 @@ public class PageRank {
 
         this.H = new Matrix(this.H).inverse().getArray();
 
+        System.out.println("----------");
+        this.printMatrix(this.H);
+
         for (int i=0; i<numOfPages; i++) {
             double rankI = 0;
             for(int j=0; j<numOfPages; j++) {
                 rankI += this.H[i][j];
             }
-            System.out.println("rank Page "+i+": "+rankI);
             websites[i].setRank(rankI*(1-this.d));
         }
 
