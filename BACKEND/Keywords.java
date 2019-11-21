@@ -14,37 +14,59 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
     public Keywords(Index index) {
         super(100000); //Initial keyword size
         this.loadKeywords(index);
+        this.writeKeywords();
     }
     
+    public void updateKeywordsFromWebsites(Index index) {
+        this.clear();
+        this.clearKeywordsTXT();
+        this.loadKeywordsFromWebsites(index);
+        this.writeKeywords();
+    }
+
     public void loadKeywords(Index index) {
         this.loadKeywordsFromKeywordsTXT(index);
-        this.loadKeywordsFromWebsites(index);
+    }
+
+    private void clearKeywordsTXT() {
+        try {
+            FileWriter fw = new FileWriter(pathFile);
+            PrintWriter pw = new PrintWriter(fw);
+            pw.println("");
+            pw.close();
+          }
+        catch(IOException ex) {
+            System.out.println(pathFile+" can not be accessed.");
+        }
     }
 
     private void loadKeywordsFromWebsites(Index index) {
-        try {
+      
+
             for (Website websiteInKeyword : index.getWebsites()) { 
 
-                String keywordsString = "";
-                for (String keyword : websiteInKeyword.getKeywords()) keywordsString+=keyword+",";
-
-                System.out.println("Website: "+websiteInKeyword+", Keywords: "+keywordsString);
-                for (String keyword : websiteInKeyword.getKeywords()) {
-                    if (this.containsKey(keyword)) { //If the keyword is already in Keywords hashmap
-                        LinkedList<Website> oldWebsites = this.get(keyword);
-                        oldWebsites.add(websiteInKeyword);
-                        this.replace(keyword, oldWebsites);
-                    }
-                    else { //If the keyword is not in Keywords hashmap
-                        LinkedList<Website> newKeywordWebsites = new LinkedList<>();
-                        newKeywordWebsites.add(websiteInKeyword);
-                        this.put(keyword, newKeywordWebsites);
+                if (websiteInKeyword != null) {
+                    for (String keyword : websiteInKeyword.getKeywords()) {
+                        if (keyword != null) {
+                            if (this.containsKey(keyword)) { //If the keyword is already in Keywords hashmap
+                                LinkedList<Website> oldWebsites = this.get(keyword),
+                                                    newWebsites = oldWebsites;
+                                newWebsites.add(websiteInKeyword);
+                                this.replace(keyword, oldWebsites, newWebsites);
+        
+                            }
+                            else { //If the keyword is not in Keywords hashmap
+                                LinkedList<Website> newKeywordWebsites = new LinkedList<>();
+                                newKeywordWebsites.add(websiteInKeyword);
+                                this.put(keyword, newKeywordWebsites);
+                            }
+                        }
+                    
                     }
                 }
+                
             }
-        } catch (NullPointerException npe) {
-            System.out.println("There are no websites in the Index OR there are no keywords in a website");
-        }
+       
         
     }
 
@@ -83,7 +105,7 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
             this.forEach((keyword, websites) -> {
                 String urlsString = "";
                 for (Website ws : websites) urlsString += ws.getUrl() + ",";
-                pw.println(keyword+"---"+urlsString);
+                pw.println(keyword.trim().toLowerCase()+"---"+urlsString.trim().toLowerCase());
             });
             pw.close();
             return true;
