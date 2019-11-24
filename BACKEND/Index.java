@@ -30,60 +30,31 @@ public class Index {
     }
 
     public void addWebsitesFromWindow() {
-        AddNewWebsiteWindow addNewWebsiteWindow = new AddNewWebsiteWindow();
-
-        boolean websiteIsOpen = addNewWebsiteWindow .getWindowIsOpen();
-
-        while (websiteIsOpen) {
-            websiteIsOpen = addNewWebsiteWindow.getWindowIsOpen();
-            System.out.println("hola");
-        }
-
-        LinkedList<String[]> websitesAdded = addNewWebsiteWindow.getNewWebsitesList();
-
-        for (String[] newWebsite : websitesAdded) {
-            this.addWebsite(newWebsite[0],newWebsite[1],newWebsite[2]);
-        }
+        AddNewWebsiteWindow addNewWebsiteWindow = new AddNewWebsiteWindow(this);
     }
 
     public void addWebsite(String publicUrl, String privateUrl, String rawHtml) {
         Website newWebsite = new Website(publicUrl, privateUrl, rawHtml);
         this.websites[this.count] = newWebsite; //Adds the website previously created to websites[]
         this.dns.put(newWebsite.getPublicUrl(), this.count); //Inserts to the DNS the new website and increases the count
-        File websiteFolder = this.createEmptyWebsiteFiles(rawHtml);
+        File websiteFolder = this.createEmptyWebsiteFiles();
         this.createWebsiteMetadataFile(websiteFolder);
         this.createMetaDescriptionFile(websiteFolder);
         this.count++;
     }
 
-    public File createEmptyWebsiteFiles(String rawHtml) {
-        String newWebsiteFolderPath = websitesPath+"/"+Integer.toString(this.count),
-                newWebsiteMetadataFolderPath = newWebsiteFolderPath + "/METADATA";
+    public File createEmptyWebsiteFiles() {
+        String newWebsiteFolderPath = websitesPath+"/"+Integer.toString(this.count);
 
         File newWebsiteFolder = new File(newWebsiteFolderPath);
         newWebsiteFolder.mkdirs(); //Creates empty website folder 
-        this.writeRawHTML(rawHtml, newWebsiteFolderPath+"/index.html");
 
-        new File(newWebsiteMetadataFolderPath).mkdirs();
 
         return newWebsiteFolder;
 
     }
 
-    public boolean writeRawHTML(String rawHtml, String htmlFilePath) {
-        try {
-            FileWriter fw = new FileWriter(htmlFilePath);
-            PrintWriter pw = new PrintWriter(fw);
-            pw.println(rawHtml);
-            pw.close();
-            return true;
-        }
-        catch(IOException ex) {
-            System.out.println(htmlFilePath+" can not be accessed.");
-        }
-        return false;
-    }
-
+  
     public void loadMetadata() {
         try{
             File[] websitesDirectory = new File(this.websitesPath).listFiles(File::isDirectory); //Array of websites directories
@@ -117,7 +88,7 @@ public class Index {
     }
 
     private boolean createMetaDescriptionFile(File websiteFolder) {
-        String metaDescriptionPath = websiteFolder.getPath()+"/METADATA/metaDescription.txt";
+        String metaDescriptionPath = websiteFolder.getPath()+"/metaDescription.txt";
 
         try {
             FileWriter fw = new FileWriter(metaDescriptionPath);
@@ -137,7 +108,7 @@ public class Index {
     }
 
     private boolean createWebsiteMetadataFile(File websiteFolder) {
-        String metadataPath = websiteFolder.getPath()+"/METADATA/website.metadata";
+        String metadataPath = websiteFolder.getPath()+"/website.metadata";
 
         try {
             FileWriter fw = new FileWriter(metadataPath);
@@ -172,15 +143,14 @@ public class Index {
     }
 
     private Website buildWebsite(File websiteFolder) {
-        String metadataPath = websiteFolder.getPath()+"/METADATA/website.metadata";
+        String metadataPath = websiteFolder.getPath()+"/website.metadata";
 
         String[] websiteMetadata = this.readWebsiteMetaData(metadataPath);
 
         String  publicUrl = websiteMetadata[0],
                 privateUrl = websiteMetadata[1],
                 title = websiteMetadata[2],
-                rawHtml = getFileContent(websiteFolder.getPath()+"/index.html"),
-                metaDescription = getFileContent(websiteFolder.getPath()+"/METADATA/metaDescription.txt");
+                metaDescription = getFileContent(websiteFolder.getPath()+"/metaDescription.txt");
         HashSet<String> linksTo = new HashSet<>();
         for (String link : websiteMetadata[4].split(",")) linksTo.add(link);
         String[]    keywords = websiteMetadata[3].split(",");
@@ -193,26 +163,11 @@ public class Index {
         int visitors = Integer.parseInt(websiteMetadata[6]);
         double  rank = Double.parseDouble(websiteMetadata[7]);
 
-        return new Website(publicUrl, privateUrl, title, metaDescription, rawHtml, keywords, linksTo, visitors, created, rank);
+        return new Website(publicUrl, privateUrl, title, metaDescription, keywords, linksTo, visitors, created, rank);
         
     }
 
-    private boolean hasMetadata(String pathFile) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(pathFile));
-            br.readLine(); //Discards header file
-            String line = br.readLine();
-            br.close(); 
-            return (line != null && line.length()>0) ? true : false;
-        }
-        catch (FileNotFoundException ex){
-            System.out.println(pathFile + " not found!. "+ex);
-        }
-        catch (IOException ex){
-            System.out.println("There was an I/O error.");
-        }
-        return false;
-    }
+
 
     private String[] readWebsiteMetaData(String pathFile) {
         String[] websiteMetadata = new String[8];
