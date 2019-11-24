@@ -65,5 +65,50 @@ def extract_metadata(url):
 # addPages(links,12)
 
 
+def get_existing_urls():
+    count = 0
+    websites_path = "../WEBSITES/"
+    existing_urls = set()
+    websites_folders = [f.name for f in os.scandir(websites_path) if f.is_dir()]
+    for website_folder in websites_folders:
+        existing_urls.add(get_url_from_website_folder(websites_path+website_folder))
+        if int(website_folder) > count:
+            count = int(website_folder)
+    return [existing_urls, count]
+
+
+def get_url_from_website_folder(website_folder):
+    with open(website_folder+"/website.metadata", "r") as website_metadata_file:
+        website_metadata_file.readline()
+        metadata = website_metadata_file.readline().split("!---!")
+    return metadata[0] 
+
+
+def get_urls_from_search(searchPhrase, existing_urls, count):
+    new_urls = existing_urls
+    new_count = count
+    from googlesearch import search
+    for url in search(searchPhrase, stop=20):
+        if url not in new_urls:
+            new_count += 1
+            new_urls.add(url)
+            addWebsite(url, new_count)
+
+    return [new_urls, new_count]
+
+def main():
+    existing_urls_data = get_existing_urls()
+
+    existing_urls = existing_urls_data[0]
+    count = existing_urls_data[1]
+
+    search_phrases = ['perros']
+
+    for search_phrase in search_phrases:
+        existing_urls_data = get_urls_from_search(search_phrase, existing_urls, count)
+        existing_urls = existing_urls_data[0]
+        count = existing_urls_data[1]
+
+main()
 
 
