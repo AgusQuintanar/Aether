@@ -1,1 +1,2 @@
 The article presents a complete list of languages available in Office 365 portal, along with their IDs. This may come in handy especially if you have a hybrid environment and cannot check the list directly in Office 365.
+
