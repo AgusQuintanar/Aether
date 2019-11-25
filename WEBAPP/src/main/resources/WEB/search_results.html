@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="style2.css">
 		<link rel="shortcut icon" type="image/png" href="Images/icon2.png"/>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -15,6 +15,16 @@
 	</head>
 	<script>
 
+	//document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+
+		/*document.getElementById("result").innerHTML = localStorage.lastname;
+
+		if (localStorage.colInd) {
+			localStorage.colInd = Number(localStorage.clickcount) + 1;
+		} else {
+			localStorage.clickcount = 1;*/
+
+
 		var colorIndex = localStorage.getItem("colInd");
 
 		var colors = ["#383838","white"];
@@ -22,6 +32,7 @@
 		var botonLabel = ["Ligth Mode","Dark Mode"]
 		var icons = ["Images/bell2.png","Images/products2.png","Images/share2.png","Images/bell.png","Images/products.png","Images/share.png"]
 		
+
 		function changeColor(increaseIndex) {
 			if(increaseIndex) colorIndex++;
 			if (colorIndex == null) colorIndex = 0;
@@ -29,7 +40,7 @@
 			
 			document.getElementById("body").style.backgroundColor = colors[colorIndex];
 			document.getElementById("search").style.backgroundColor = colors[colorIndex];
-			document.getElementById("imgLogo_2").src = logos[colorIndex];
+			document.getElementById("imgLogo").src = logos[colorIndex];
 			document.getElementById("btnColor").innerText = botonLabel[colorIndex];
 			document.getElementById("bell").src = icons[3*colorIndex];
 			document.getElementById("products").src = icons[1+3*colorIndex];
@@ -42,6 +53,7 @@
 			changeColor(false);
 		}
 
+
 	</script>
 	<header>
 		<img id="bell" src="Images/bell.png"/>
@@ -51,16 +63,21 @@
 	</header>
 
 
-    <body id='body_2'>
-		<div id = "search_2">
-			<img id="imgLogo_2" src="Images/logo7.png"/>
-			<form name="aether" action="#" method="POST"><br>
-					<div class="searchbar_2">
-						<input class="search_input" type="text" name="" placeholder="Search...">
-						<a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+    <body id='body'>
+
+		<div id = "search">
+			<img id="imgLogo" src="Images/logo7.png"/>
+
+				<form name="google" action="#" method="POST"><br>
+					<div class="searchbar">
+					<input class="search_input" type="text" name="" placeholder="Search...">
+					<a href="#" class="search_icon"><i class="fas fa-search"></i></a>
 					</div>
 				
 			</form>
+
+
+		
 		</div>
 
 		<footer>
