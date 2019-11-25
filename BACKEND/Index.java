@@ -69,6 +69,9 @@ public class Index {
                 }
                 catch (NullPointerException npe) {
                     System.out.println("Null value found while loading metadata.");
+                }
+                catch(IndexOutOfBoundsException iobe) {
+                    
                 } 
             }
         
