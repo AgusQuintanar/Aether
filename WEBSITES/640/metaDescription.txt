@@ -1,1 +1,2 @@
 The Syntax Highlighter for Chrome. Contribute to tsenart/sight development by creating an account on GitHub.
+

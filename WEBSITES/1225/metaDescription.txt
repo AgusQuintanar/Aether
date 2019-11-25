@@ -1,0 +1,2 @@
+Standard Consolas font with FiraCode ligatures. Contribute to somq/consolas-ligaturized development by creating an account on GitHub.
+

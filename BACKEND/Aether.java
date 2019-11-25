@@ -36,7 +36,7 @@ public class Aether {
         this.keywords.updateKeywordsFromWebsites(this.index);
     }
 
-    private void search(String searchPhrase) {
+    public void search(String searchPhrase) {
         SearchPhrase sf = new SearchPhrase(searchPhrase);
         HashMap<Website, Double> websitesFound = new HashMap<>();
         
@@ -60,11 +60,11 @@ public class Aether {
     public static void main(String[] args) {
         
         Aether aether = new Aether();
-        aether.updateWebsitesRanks();
+        //aether.updateWebsitesRanks();
 
         //for (int i=0; i<aether.getIndex().getCount(); i++) System.out.println(aether.getIndex().getWebsites()[i].getUrl()+", ");
 
-        //aether.updateKeywordsFromWebsites();
+        aether.updateKeywordsFromWebsites();
 
         // System.out.println("Resultados de la busqueda");
         // aether.search("comedor");

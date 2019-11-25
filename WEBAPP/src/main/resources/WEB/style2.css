@@ -101,11 +101,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
 input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
 	
-.search {
-    position: relative;
-    text-align: left;
-    padding-left: -50px;
-}
+
 
 .searchbar{
     margin-bottom: auto;
@@ -170,6 +166,17 @@ input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
   
 }
 
+
+.search_result {
+    height: 20%;
+    width: 50%;
+    text-align: left;
+    
+}
+
+.result_url {
+    color: white;
+}
 
 
 
