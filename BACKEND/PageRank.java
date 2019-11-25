@@ -3,6 +3,8 @@ import java.util.LinkedList;
 import Jama.Matrix;
 import java.util.Random;
 
+//Agustin Quintanar A01636142
+//Jonathan Chavez A01636160
 public class PageRank {
     private double d; //Damping Factor / Teleport --Value from 0-1
     private double[][] H;

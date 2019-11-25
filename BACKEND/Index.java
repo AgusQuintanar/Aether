@@ -14,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList; 
 
+//Agustin Quintanar A01636142
+//Jonathan Chavez A01636160
 public class Index {
 
     private Website[] websites;
