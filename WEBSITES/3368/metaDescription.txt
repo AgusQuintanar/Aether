@@ -1,0 +1,2 @@
+In this hands-on tutorial, you'll learn the basics of using pdb, Python's interactive source code debugger. Pdb is a great tool for tracking down hard-to-find bugs and allows you to fix faulty code more quickly.
+

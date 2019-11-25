@@ -16,24 +16,16 @@ public class AddNewWebsiteWindow extends JFrame {
 
     private ControlPanel controlPanel;
 
-    public AddNewWebsiteWindow() {
+    public AddNewWebsiteWindow(Index index) {
         super("Aether - Add New Website");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         InputPanel inputPanel = new InputPanel();
         this.add(inputPanel);
-        this.controlPanel = new ControlPanel(inputPanel,this);
+        this.controlPanel = new ControlPanel(inputPanel,this, index);
 		this.add(this.controlPanel,BorderLayout.SOUTH);
         this.pack();
         this.setVisible(true);
-    }
-
-    public boolean getWindowIsOpen() {
-        return controlPanel.getWindowIsOpen();
-    }
-
-    public LinkedList<String[]> getNewWebsitesList() {
-        return this.controlPanel.getNewWebsitesList();
     }
 
     public static void main(String[] args) {
@@ -97,16 +89,13 @@ class ControlPanel extends JPanel{
 
     private InputPanel inputPanel;
 
-    private LinkedList<String[]> newWebsitesList;
-
     private boolean windowIsOpen;
 
 
-    public ControlPanel(InputPanel inputPanel, AddNewWebsiteWindow addNewWebsiteWindow) {
+    public ControlPanel(InputPanel inputPanel, AddNewWebsiteWindow addNewWebsiteWindow, Index index) {
         super();
         this.setPreferredSize(new Dimension(800,200));
         this.inputPanel = inputPanel;
-        this.newWebsitesList = new LinkedList<>();
         this.windowIsOpen = true;
 
         this.addAnotherWebsiteButton = new JButton("Add another Website");
@@ -119,8 +108,13 @@ class ControlPanel extends JPanel{
                            privateUrl = inputPanel.getTextPrivateUrlTextField(),
                            rawHtml = inputPanel.getTextRawHtmlTextArea();
                     if (rawHtml.length() > 0 && publicUrl.length()>0 && privateUrl.length()>0) {
-                        String[] newWebsite = {publicUrl,privateUrl,rawHtml};
-                        newWebsitesList.add(newWebsite);
+                        System.out.println("len: "+rawHtml.length());
+                        try {
+                            index.addWebsite(publicUrl, privateUrl, rawHtml);
+
+                        } catch(StringIndexOutOfBoundsException efew) {
+                            
+                        }
                         JOptionPane.showMessageDialog(null, "Website added succesfully.");
                         inputPanel.setTextRawHtmlTextArea("");
                         inputPanel.setTextPublicUrlTextField("");
@@ -155,12 +149,5 @@ class ControlPanel extends JPanel{
         super.paintComponent(g);
     }
 
-    public LinkedList<String[]> getNewWebsitesList() {
-        return this.newWebsitesList;
-    }
-
-    public boolean getWindowIsOpen() {
-        return this.windowIsOpen;
-    }
 }
 

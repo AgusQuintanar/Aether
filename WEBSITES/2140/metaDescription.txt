@@ -1,0 +1,2 @@
+Descripción o resumen de lo que es un microprocesador o como se suele también llamarse CPU, procesador... las partes de la CPU como memoria cache, registros, bus... etc
+

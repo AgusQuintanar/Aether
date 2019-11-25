@@ -1,0 +1,2 @@
+Today we are going to talk about the PLC basics. The programmable logic controller, or PLC, is a special purpose computer. It has no display, no keyboard, no printer, no hard drive, and hides in the control panel out on the factory floor, but it is still a computer.
+

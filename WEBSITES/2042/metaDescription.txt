@@ -1,0 +1,2 @@
+Toda la lista de los codigos Alt. Contiene ambos tango de 1-256 y 0128 - 0256. Números que puedes escribir con tu teclado numerico para obtener símbolos especiales. Una lista completa con todos los codigos Alt y caracteres que ellos producen.
+

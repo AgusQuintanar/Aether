@@ -1,0 +1,2 @@
+Discover important data structures like dictionaries and DataFrames, visualize data with matplotlib, and learn to write your own Python functions.
+

@@ -1,0 +1,2 @@
+Functional programming is a programming paradigm that revolves around the use of functions. This guide covers the basics and what you should know.
+

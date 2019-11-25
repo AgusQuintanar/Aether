@@ -1,0 +1,2 @@
+Pacote de internet para que o cliente Vivo Pré possa acessar conteúdo de video e música sem se preocupar em gastar seu pacote de dados principal. Além disso, o MB é mais barato neste pacote.
+

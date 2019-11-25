@@ -1,0 +1,2 @@
+La app de Azteca Deportes brinda acceso a transmisiones de partidos de futbol en vivo (que transmita TV Azteca), resultados, horarios y más varias ligas.
+

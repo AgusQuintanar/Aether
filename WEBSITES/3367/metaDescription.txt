@@ -1,0 +1,2 @@
+This tutorial details how to get started with Python programming—completely from scratch.
+

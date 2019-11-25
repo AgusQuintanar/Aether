@@ -1,0 +1,2 @@
+Linear programming, mathematical technique for maximizing or minimizing a linear function.
+
