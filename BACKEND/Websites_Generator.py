@@ -4,8 +4,6 @@ import re
 import os
 import datetime
 
-
-
 def create_website_files(count, url, metadata):
     websites_path = "../WEBSITES/"
 
@@ -95,31 +93,37 @@ def get_urls_from_search(searchPhrase, existing_urls, count):
 
     return [new_urls, new_count]
 
-def get_outgoing_urls():
+def crawler(existing_urls, count):
     websites_path = "../WEBSITES/"
 
-    count = get_existing_urls()[1]
-    
+    new_count = count
+    outgoing_urls = existing_urls
 
-    outgoing_urls = set()
+    error_count = 0
     
-    for website in range(count-10):
-        print(count)
+    for website in range(4000000):
         try:
             with open(websites_path+str(website)+"/website.metadata", "r") as file:
-                
                 cont = 0
                 for line in file.readlines():
                     if cont == 1:
                         print(line.split('!---!')[4].split(','))
                         websites = line.split('!---!')[4].split(',')
-                        for ws in websites:
-                            outgoing_urls.add(str(ws))
+                        #print("websites: "+websites)
+                        for url in websites:
+                            if str(url).strip().strip("'") not in outgoing_urls:
+                                print("url added: "+str(url).strip().strip("'"))
+                                new_count += 1
+                                addWebsite(str(url).strip().strip("'"), new_count)
+                                outgoing_urls.add(str(url).strip().strip("'"))
                     cont += 1
         except Exception as e:
+            error_count += 1
+            if error_count == 1000:
+                break
             continue
            
-    return outgoing_urls
+    return [outgoing_urls, new_count]
 
 
 
@@ -129,26 +133,31 @@ def main():
     existing_urls = existing_urls_data[0]
     count = existing_urls_data[1]
 
-    search_phrases = []
+    # search_phrases = []
 
-    with open ("relatedQueries.csv",'r') as file:
-        for line in file.readlines():
-            if line != " " and "," in line:
-                search_phrases.append(line.split(',')[0])
+    # with open ("relatedQueries.csv",'r') as file:
+    #     for line in file.readlines():
+    #         if line != " " and "," in line:
+    #             search_phrases.append(line.split(',')[0])
 
-    print(search_phrases)
+    # print(search_phrases)
 
     #outgoing_urls = get_outgoing_urls()
 
 
-    for search_phrase in search_phrases:
-        try:
-            existing_urls_data = get_urls_from_search(search_phrase, existing_urls, count)
-            existing_urls = existing_urls_data[0]
-            count = existing_urls_data[1]
-        except Exception as e:
-            print("Error while loading page"+str(e))
+    # for search_phrase in search_phrases:
+    #     try:
+    #         existing_urls_data = get_urls_from_search(search_phrase, existing_urls, count)
+    #         existing_urls = existing_urls_data[0]
+    #         count = existing_urls_data[1]
+    #     except Exception as e:
+    #         print("Error while loading page"+str(e))
 
+
+    try:
+        crawler(existing_urls, count)
+    except Exception as e:
+        print("Error while loading page"+str(e))
 
 
 main()
