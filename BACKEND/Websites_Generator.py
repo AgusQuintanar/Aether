@@ -109,10 +109,12 @@ def main():
 
 
     for search_phrase in search_phrases:
-        existing_urls_data = get_urls_from_search(search_phrase, existing_urls, count)
-        existing_urls = existing_urls_data[0]
-        count = existing_urls_data[1]
-
+        try:
+            existing_urls_data = get_urls_from_search(search_phrase, existing_urls, count)
+            existing_urls = existing_urls_data[0]
+            count = existing_urls_data[1]
+        except Exception as e:
+            print("Error while loading page")
 main()
 
 

@@ -64,7 +64,7 @@ public class Aether {
 
         //for (int i=0; i<aether.getIndex().getCount(); i++) System.out.println(aether.getIndex().getWebsites()[i].getUrl()+", ");
 
-        aether.updateKeywordsFromWebsites();
+        //aether.updateKeywordsFromWebsites();
 
         // System.out.println("Resultados de la busqueda");
         // aether.search("comedor");
