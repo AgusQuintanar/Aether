@@ -1,0 +1,2 @@
+What is Functional Programming? Functional programming (also called FP) is a way of thinking about software construction by creating pure functions. It avoid concepts of shared state, mutable data obs
+

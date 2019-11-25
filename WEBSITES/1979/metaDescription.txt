@@ -1,0 +1,2 @@
+&quot;Vincular una computadora&quot; es una manera opcional de instalar la aplicación para escritorio. La característica te permite crear o vincular una cuenta existente.
+

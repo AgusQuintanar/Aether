@@ -1,0 +1,2 @@
+The application program interface (API) specifies how software components interact when programming GUI components. This article explains how APIs work.
+

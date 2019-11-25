@@ -1,0 +1,2 @@
+You’ve likely seen the term “API” come up. Operating system, web browser, and app updates often announce new APIs for developers. But what is an API?
+

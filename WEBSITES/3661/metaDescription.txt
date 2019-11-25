@@ -1,0 +1,2 @@
+You've most likely used a tool or service built with an API. This article explains what is an API and why it matters to your business.
+

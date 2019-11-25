@@ -1,0 +1,2 @@
+Software Programming - In order to make a computer functional, a set of instructions need to be programmed, as these programmed languages are carriers to the performance of a task.
+

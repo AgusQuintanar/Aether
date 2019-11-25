@@ -1,0 +1,2 @@
+In current development, Object Oriented Programming has proven more popular than its predecessor Functional Programming.
+

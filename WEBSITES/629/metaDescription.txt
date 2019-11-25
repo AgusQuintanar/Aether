@@ -1,0 +1,2 @@
+The Microsoft Consolas Font Family is a set of highly legible fonts designed for ClearType. It is intended for use in programming environments and other circumstances where a monospaced font is specified. This installation package will set the default font for Visual Studio to Consolas.
+

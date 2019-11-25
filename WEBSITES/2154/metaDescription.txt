@@ -1,0 +1,2 @@
+Unidad central de proceso o CPU. Memoria RAM. El teclado. Monitor. Tipos de conexión. Valoración del rendimiento de un microprocesador. Estructura interna de un disco duro. ¿Qué es Internet?.
+

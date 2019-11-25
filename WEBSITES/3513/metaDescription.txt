@@ -1,0 +1,2 @@
+Programmable Logic Controllers (PLC) are defined as miniature industrial computers that contain hardware and software used to perform control functions.
+

@@ -1,0 +1,2 @@
+TV Azteca, one of Mexico’s leading broadcasters, has collaborated with Imagine Communications to deploy a next-generation playout and master control infrastructure. The scalable, software-based platform running on commercial off-the-shelf (COTS) hardware is currently driving 120 channels from TV Azteca’s headquarters in Mexico City.
+

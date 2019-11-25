@@ -1,0 +1,2 @@
+Explains the terminology and demonstrates the basic techniques for 'linear programming'; that is, for maximizing or minimizing a linear relation subject to certain linear inequalities.
+

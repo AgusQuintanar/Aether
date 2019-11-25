@@ -1,0 +1,2 @@
+The 5 PLC Programming Languages are Ladder Diagram (LD), Sequential Function Charts (SFC), Function Block Diagram (FBD), Structured Text (ST), and Instruction List (IL). These are all a part of the IEC (International Electrotechnical Commission) Section 61131-3 Standard.
+

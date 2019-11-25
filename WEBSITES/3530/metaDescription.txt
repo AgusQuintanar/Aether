@@ -1,0 +1,2 @@
+Arduino is an open-source, AVR-based electronics prototyping platform that can be used for a wide range of projects and is easy-to-use. It is intended for artists, designers, hobbyists, and anyone interested in creating interactive objects or environments.  These development boards are a good entry point for people new to embedded programming.
+

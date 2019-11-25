@@ -1,0 +1,3 @@
+In Class XI, we have studied systems of linear inequalities in two variables and their solutions by
+graphical method. An important class of optimisation problems is linear programming
+problem which can be solved by graphical methods

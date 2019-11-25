@@ -1,0 +1,2 @@
+Andrei Alexandrescu didn’t stand much of a chance. And neither did Walter Bright. When the two men met for beers at a Seattle bar in 2005, each was in the midst of building a new programming language, trying to remake the way the world creates and runs its computer software. That’s something pretty close to \[…\]
+
