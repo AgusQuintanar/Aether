@@ -1,1 +1,2 @@
 In this article, you'll see several learning strategies and tips that will help jump start your journey of becoming a rockstar Python programmer.
+

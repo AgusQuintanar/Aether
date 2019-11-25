@@ -1,1 +1,2 @@
 Computer programming language, any of various languages for expressing a set of detailed instructions for a computer. The earliest programming languages were assembly languages, not far removed from instructions directly executed by hardware. Although there are many computer languages, relatively few are widely used.
+

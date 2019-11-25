@@ -1,1 +1,2 @@
 Learn the basic structure of the PLC programmable logic controller , how it works, programmed, and look at some advanced technologies and types of PLCs
+

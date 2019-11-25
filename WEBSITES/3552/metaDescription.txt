@@ -1,1 +1,2 @@
 Functional programming is something that existed for much longer than object oriented, dating back to the ancient days of Turing machines. It has seen ebbs and flows in popularity over time, based…
+
