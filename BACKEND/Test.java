@@ -51,16 +51,26 @@ public class Test {
 						aether.search(request.getValue());
 						SearchResult[] results = aether.getSearchResults().getSearchResults();
 						for (SearchResult sr : results) {
-							// Title
-							writer.println(sr.getWebsite().getTitle());
-							// PublicUrl
-							writer.println(sr.getWebsite().getPrivateUrl());
-							// PrivateUrl
-							writer.println(sr.getWebsite().getPublicUrl());
-							// MetaDescription
-							writer.println(sr.getWebsite().getMetaDescription());
-							// Rank
-							writer.println(sr.getOverallRank() + "-#-#");
+
+
+							String title = sr.getWebsite().getTitle(),
+								   publicUrl = sr.getWebsite().getPublicUrl(),
+								   description = sr.getWebsite().getMetaDescription();
+
+							if (title.length() > 0 && publicUrl.length() > 0 && description.length() > 0) {
+								// Title
+								writer.println(title);
+								// PublicUrl
+								writer.println(publicUrl);
+								// // PrivateUrl
+								writer.println(sr.getWebsite().getPublicUrl());
+								// MetaDescription
+								writer.println(description);
+								// Rank
+								writer.println(sr.getOverallRank() + "-#-#");
+							}
+
+							
 
 						}
 
