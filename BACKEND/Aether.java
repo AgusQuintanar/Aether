@@ -60,7 +60,7 @@ public class Aether {
     public static void main(String[] args) {
         
         Aether aether = new Aether();
-        aether.updateWebsitesRanks();
+        //aether.updateWebsitesRanks();
 
         //for (int i=0; i<aether.getIndex().getCount(); i++) System.out.println(aether.getIndex().getWebsites()[i].getUrl()+", ");
 

@@ -20,6 +20,7 @@ public class Test {
 		Keywords kw = aether.getKeywords();
 
 		for (String s : kw.keySet()) {
+			System.out.println("key: "+s);
 			trie.add(s);
 		}
 

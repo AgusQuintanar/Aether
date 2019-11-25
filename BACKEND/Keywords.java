@@ -86,9 +86,16 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
                     String[] data = line.toLowerCase().split("---");
                     LinkedList<Website> kwWebsites = new LinkedList<>(); //websites of each keyword
                     for(String url : data[1].split(",")) {
-                        int websiteID = index.getDns().get(url);
-                        kwWebsites.add(index.getWebsites()[websiteID]);
+                        try {
+                            int websiteID = index.getDns().get(url);
+                            kwWebsites.add(index.getWebsites()[websiteID]);
+                        } catch(Exception e) {
+
+                        } 
                     }
+                    // System.out.println("data0: "+data[0]);
+                    // System.out.println("line: "+line);
+
                     this.put(data[0], kwWebsites); 
                 } 
             }
