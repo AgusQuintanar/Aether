@@ -1,0 +1,1 @@
+Descripcion de la nota. Máximo 120 caractéres.

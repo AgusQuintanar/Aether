@@ -1,0 +1,1 @@
+As Data Scientists we become acquainted with the concept of optimization very early in our careers. Optimization lies at the heart of every machine learning model. But our relationship with…

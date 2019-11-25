@@ -1,0 +1,1 @@
+Extreme Programming (XP) is one of the numerous Agile frameworks applied in IT companies. But it's key feature — emphasis on technical aspects of software development — distinguishes XP from the rest of approaches.

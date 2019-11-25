@@ -1,0 +1,1 @@
+Learn JavaScript and Javascript arrays to build interactive websites and pages that adapt to every device. Add dynamic behavior, store information, and handle requests and responses. This course can help marketers and designers upgrade their career and is a starting point for front-end engineers.

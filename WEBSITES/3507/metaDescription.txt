@@ -1,0 +1,1 @@
+PLCs can be programmed in various ways. Popular PLC programming languages are ladder diagrams, Function Block Diagrams (FBD), and statement list.

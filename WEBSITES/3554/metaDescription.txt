@@ -1,0 +1,1 @@
+Functional Programming - Introduction - Functional programming languages are specially designed to handle symbolic computation and list processing applications. Functional programming is based on math
