@@ -1,1 +1,2 @@
 Read about Programmable Logic Controllers (PLC) (Ladder Logic) in our free Electronics Textbook
+

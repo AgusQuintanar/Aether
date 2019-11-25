@@ -1,1 +1,2 @@
 As a programmer, you want to write elegant, maintainable, scalable, predictable code. The principles of functional programming can help.
+

@@ -1,1 +1,2 @@
 This definition explains what a PLC is and how the systems are used in the industrial control systems (ICS) to control machinery in many industries, including those involved in critical infrastructure.
+
