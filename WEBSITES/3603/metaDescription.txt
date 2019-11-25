@@ -1,0 +1,1 @@
+Swift Playgrounds is a revolutionary new app for iPad that helps you learn and explore coding in Swift, the same powerful language used to create world-class apps for the App Store. Engaging lessons and challenges help students learn the core concepts of coding by writing real Swift and iOS code in an interactive environment designed for touch.

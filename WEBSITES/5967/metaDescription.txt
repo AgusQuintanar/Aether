@@ -1,0 +1,1 @@
+Threads proporcionaría servicios de mensajería para interactuar con otros usuarios y competir con Snapchat

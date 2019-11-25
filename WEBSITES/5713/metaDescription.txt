@@ -1,0 +1,1 @@
+OneAPI unifies code across multiple hardware targets—like Nvidia and Intel GPUs.

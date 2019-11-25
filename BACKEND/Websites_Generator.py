@@ -83,7 +83,7 @@ def get_urls_from_search(searchPhrase, existing_urls, count):
     new_urls = existing_urls
     new_count = count
     from googlesearch import search
-    for url in search(searchPhrase, stop=20):
+    for url in search(searchPhrase, stop=15):
         if url not in new_urls:
             new_count += 1
             new_urls.add(url)

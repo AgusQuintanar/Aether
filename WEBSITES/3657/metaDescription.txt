@@ -1,0 +1,1 @@
+APIs simplify app development. But what is an API anyway?

@@ -1,0 +1,1 @@
+Learn what exactly an API is and why it matters. Get the definition of an Application Program Interface and examples of what it’s used for.

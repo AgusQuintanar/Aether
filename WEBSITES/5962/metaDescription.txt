@@ -1,0 +1,1 @@
+Una vulnerabilidad en el código de WhatsApp permite alterar el contenido de los mensajes, enviarlos a grupos públicos o cambiar quién dijo qué, lo que puede contribuir a expandir noticias falsas.
