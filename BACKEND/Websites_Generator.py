@@ -5,6 +5,7 @@ import os
 import datetime
 
 
+
 def create_website_files(count, url, metadata):
     websites_path = "../WEBSITES/"
 
@@ -12,8 +13,8 @@ def create_website_files(count, url, metadata):
 
     with open(websites_path+str(count)+"/website.metadata", "w") as file:
         file.write("publicUrl!---!privateUrl!---!TITLE!---!KEYWORDS!---!LINKS_TO!---!CREATED!---!VISITORS!---!RANK\n")
-        file.write(url.strip().strip('\n')+'!---!'+url.strip().strip('\n')+'!---!'+metadata['title']+'!---!'+
-        str(metadata['keywords']).strip().strip('\n')+'!---!'+str(metadata['outgoing_links']).strip().strip('\n')+'!---!'+
+        file.write(url.strip().strip('\n')+'!---!'+url.strip().strip('\n')+'!---!'+metadata['title']+'!---!'+str(metadata['title']).strip().strip('\n')+
+        ','+str(metadata['keywords']).strip().strip('\n')+'!---!'+str(metadata['outgoing_links']).strip().strip('\n')+'!---!'+
         datetime.date.today().strftime("%B %d, %Y")+'!---!'+str(0)+'!---!'+str(0.0))
         file.close()
 
@@ -73,10 +74,13 @@ def get_existing_urls():
 
 
 def get_url_from_website_folder(website_folder):
-    with open(website_folder+"/website.metadata", "r") as website_metadata_file:
-        website_metadata_file.readline()
-        metadata = website_metadata_file.readline().split("!---!")
-    return metadata[0] 
+    try:
+        with open(website_folder+"/website.metadata", "r") as website_metadata_file:
+            website_metadata_file.readline()
+            metadata = website_metadata_file.readline().split("!---!")
+        return metadata[0] 
+    except:
+        return ""
 
 
 def get_urls_from_search(searchPhrase, existing_urls, count):
@@ -90,6 +94,34 @@ def get_urls_from_search(searchPhrase, existing_urls, count):
             addWebsite(url, new_count)
 
     return [new_urls, new_count]
+
+def get_outgoing_urls():
+    websites_path = "../WEBSITES/"
+
+    count = get_existing_urls()[1]
+    
+
+    outgoing_urls = set()
+    
+    for website in range(count-10):
+        print(count)
+        try:
+            with open(websites_path+str(website)+"/website.metadata", "r") as file:
+                
+                cont = 0
+                for line in file.readlines():
+                    if cont == 1:
+                        print(line.split('!---!')[4].split(','))
+                        websites = line.split('!---!')[4].split(',')
+                        for ws in websites:
+                            outgoing_urls.add(str(ws))
+                    cont += 1
+        except Exception as e:
+            continue
+           
+    return outgoing_urls
+
+
 
 def main():
     existing_urls_data = get_existing_urls()
@@ -106,6 +138,7 @@ def main():
 
     print(search_phrases)
 
+    #outgoing_urls = get_outgoing_urls()
 
 
     for search_phrase in search_phrases:
@@ -114,7 +147,8 @@ def main():
             existing_urls = existing_urls_data[0]
             count = existing_urls_data[1]
         except Exception as e:
-            print("Error while loading page")
+            print("Error while loading page"+str(e))
+
+
+
 main()
-
-
