@@ -33,7 +33,9 @@ public class PageRank {
             }
         }
 
+        this.printMatrix(this.H);
         this.H = new Matrix(this.H).inverse().getArray();
+        this.printMatrix(this.H);
 
         for (int i=0; i<numOfPages; i++) {
             double rankI = 0;
