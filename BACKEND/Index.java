@@ -24,8 +24,8 @@ public class Index {
 
     public Index() {
         this.count = 0;
-        this.dns = new HashMap<>(100000);
-        this.websites = new Website[100000];
+        this.dns = new HashMap<>(1000000);
+        this.websites = new Website[1000000];
         this.loadMetadata();
     }
 
@@ -56,19 +56,22 @@ public class Index {
 
   
     public void loadMetadata() {
-        try{
+    
             File[] websitesDirectory = new File(this.websitesPath).listFiles(File::isDirectory); //Array of websites directories
 
             for (File websiteFolder : websitesDirectory) { 
                 //System.out.println("folder: " + websiteFolder);
-                Website newWebsite = this.buildWebsite(websiteFolder); 
-                this.websites[Integer.parseInt(websiteFolder.getName())] = newWebsite; //Adds the website previously created to websites[]
-                this.dns.put(newWebsite.getPublicUrl(), Integer.parseInt(websiteFolder.getName())); //Inserts to the DNS the new website and increases the count
-                this.count++;
+                try {
+                    Website newWebsite = this.buildWebsite(websiteFolder); 
+                    this.websites[Integer.parseInt(websiteFolder.getName())] = newWebsite; //Adds the website previously created to websites[]
+                    this.dns.put(newWebsite.getPublicUrl(), Integer.parseInt(websiteFolder.getName())); //Inserts to the DNS the new website and increases the count
+                    this.count++;
+                }
+                catch (NullPointerException npe) {
+                    System.out.println("Null value found while loading metadata.");
+                } 
             }
-        } catch (NullPointerException npe) {
-            System.out.println("Null value found while loading metadata.");
-        }
+        
         
     }
 
@@ -144,7 +147,6 @@ public class Index {
 
     private Website buildWebsite(File websiteFolder) {
 
-       
             String metadataPath = websiteFolder.getPath()+"/website.metadata";
 
             String[] websiteMetadata = this.readWebsiteMetaData(metadataPath);
@@ -153,11 +155,12 @@ public class Index {
                     privateUrl = websiteMetadata[1],
                     title = websiteMetadata[2],
                     metaDescription = getFileContent(websiteFolder.getPath()+"/metaDescription.txt");
+            String[]    keywords = websiteMetadata[3].split(",");
+
         try {
             HashSet<String> linksTo = new HashSet<>();
         
             for (String link : websiteMetadata[4].split(",")) linksTo.add(link);
-            String[]    keywords = websiteMetadata[3].split(",");
             Date created = new Date();
             try {
                 created = new SimpleDateFormat("dd/MM/yyyy").parse(websiteMetadata[5]);
@@ -250,7 +253,7 @@ public class Index {
 
 
     public static void main(String[] args) {
-  
+
     }
 
 }

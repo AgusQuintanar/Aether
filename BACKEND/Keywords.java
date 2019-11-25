@@ -12,9 +12,8 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
     private static final String pathFile = "keywords.txt";
 
     public Keywords(Index index) {
-        super(100000); //Initial keyword size
+        super(100000000); //Initial keyword size
         this.loadKeywords(index);
-        this.writeKeywords();
     }
     
     public void updateKeywordsFromWebsites(Index index) {
@@ -43,32 +42,37 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
     private void loadKeywordsFromWebsites(Index index) {
         try {
 
-            for (Website websiteInKeyword : index.getWebsites()) { 
+            for (Website website : index.getWebsites()) { 
 
-                if (websiteInKeyword != null) {
-                    for (String keyword : websiteInKeyword.getKeywords()) {
-                        if (keyword != null) {
-                            if (this.containsKey(keyword)) { //If the keyword is already in Keywords hashmap
-                                LinkedList<Website> oldWebsites = this.get(keyword),
-                                                    newWebsites = oldWebsites;
-                                newWebsites.add(websiteInKeyword);
-                                this.replace(keyword, oldWebsites, newWebsites);
-        
+                if (website != null) {
+                    String[] websiteKeywords = website.getKeywords();
+                    if (websiteKeywords.length > 0) {
+                        for (String keyword : websiteKeywords) {
+                            keyword = keyword.trim();
+                            if (keyword != null && keyword.length()>0) {
+                                if (this.containsKey(keyword)) { //If the keyword is already in Keywords hashmap
+                                    LinkedList<Website> oldWebsites = this.get(keyword),
+                                                        newWebsites = oldWebsites;
+                                    newWebsites.add(website);
+                                    this.replace(keyword, oldWebsites, newWebsites);
+            
+                                }
+                                else { //If the keyword is not in Keywords hashmap
+                                    LinkedList<Website> newKeywordWebsites = new LinkedList<>();
+                                    newKeywordWebsites.add(website);
+                                    this.put(keyword, newKeywordWebsites);
+                                }
                             }
-                            else { //If the keyword is not in Keywords hashmap
-                                LinkedList<Website> newKeywordWebsites = new LinkedList<>();
-                                newKeywordWebsites.add(websiteInKeyword);
-                                this.put(keyword, newKeywordWebsites);
-                            }
+                        
                         }
-                    
                     }
+                    
                 }
                 
             }
         }
         catch (NullPointerException npe) {
-            
+
         }
         
     }

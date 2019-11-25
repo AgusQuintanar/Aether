@@ -37,7 +37,7 @@ public class PageRank {
                 rankI += this.H[i][j];
             }
             websites[i].setRank(rankI*(1-this.d));
-            //System.out.println("rank "+i+": "+rankI*(1-this.d));
+            System.out.println("rank "+i+": "+rankI*(1-this.d));
         }
 
         return websites;
