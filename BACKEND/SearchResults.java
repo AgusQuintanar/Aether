@@ -1,6 +1,8 @@
 import java.util.HashMap;
 import java.util.Map;
 
+//Agustin Quintanar A01636142
+//Jonathan Chavez A01636160
 public class SearchResults {
     private SearchResult[] searchResults;
     

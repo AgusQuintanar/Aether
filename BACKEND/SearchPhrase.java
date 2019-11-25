@@ -1,5 +1,7 @@
 import java.util.LinkedList;
 
+//Agustin Quintanar A01636142
+//Jonathan Chavez A01636160
 public class SearchPhrase {
     private String[] phrase;
 

@@ -1,3 +1,6 @@
+//Agustin Quintanar A01636142
+//Jonathan Chavez A01636160
+
 public class SearchResult implements Comparable<SearchResult>{
     private Website website;
     private double overallRank;

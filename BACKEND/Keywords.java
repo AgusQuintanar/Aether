@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 
+//Agustin Quintanar A01636142
+//Jonathan Chavez A01636160
+
 public class Keywords extends HashMap<String,LinkedList<Website>>{
 
     private static final String pathFile = "keywords.txt";

@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 
+//Agustin Quintanar A01636142
+//Jonathan Chavez A01636160
 public class AddNewWebsiteWindow extends JFrame {
 
     private ControlPanel controlPanel;

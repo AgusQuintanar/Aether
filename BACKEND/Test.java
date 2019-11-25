@@ -8,6 +8,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+//Agustin Quintanar A01636142
+//Jonathan Chavez A01636160
+
 public class Test {
 
 	public static void main(String[] args) {
