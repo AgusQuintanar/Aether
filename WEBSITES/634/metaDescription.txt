@@ -1,0 +1,1 @@
+OpenType Layout features: stylistic alternates, localized forms, uppercase-sensitive forms, oldstyle figures, lining figures, arbitrary fractions, superscr

@@ -143,27 +143,41 @@ public class Index {
     }
 
     private Website buildWebsite(File websiteFolder) {
-        String metadataPath = websiteFolder.getPath()+"/website.metadata";
 
-        String[] websiteMetadata = this.readWebsiteMetaData(metadataPath);
+       
+            String metadataPath = websiteFolder.getPath()+"/website.metadata";
 
-        String  publicUrl = websiteMetadata[0],
-                privateUrl = websiteMetadata[1],
-                title = websiteMetadata[2],
-                metaDescription = getFileContent(websiteFolder.getPath()+"/metaDescription.txt");
-        HashSet<String> linksTo = new HashSet<>();
-        for (String link : websiteMetadata[4].split(",")) linksTo.add(link);
-        String[]    keywords = websiteMetadata[3].split(",");
-        Date created = new Date();
+            String[] websiteMetadata = this.readWebsiteMetaData(metadataPath);
+    
+            String  publicUrl = websiteMetadata[0],
+                    privateUrl = websiteMetadata[1],
+                    title = websiteMetadata[2],
+                    metaDescription = getFileContent(websiteFolder.getPath()+"/metaDescription.txt");
         try {
-            created = new SimpleDateFormat("dd/MM/yyyy").parse(websiteMetadata[5]);
-        } catch(ParseException pe) {
-            System.out.println("Error while parsing date.");
+            HashSet<String> linksTo = new HashSet<>();
+        
+            for (String link : websiteMetadata[4].split(",")) linksTo.add(link);
+            String[]    keywords = websiteMetadata[3].split(",");
+            Date created = new Date();
+            try {
+                created = new SimpleDateFormat("dd/MM/yyyy").parse(websiteMetadata[5]);
+            } catch(ParseException pe) {
+                //System.out.println("Error while parsing date.");
+            }
+            int visitors = Integer.parseInt(websiteMetadata[6]);
+            double  rank = Double.parseDouble(websiteMetadata[7]);
+    
+            return new Website(publicUrl, privateUrl, title, metaDescription, keywords, linksTo, visitors, created, rank);
+        } 
+        catch(IndexOutOfBoundsException iobe) {
+            return new Website(publicUrl, privateUrl, "");
         }
-        int visitors = Integer.parseInt(websiteMetadata[6]);
-        double  rank = Double.parseDouble(websiteMetadata[7]);
+        catch(NullPointerException npe) {
+            return new Website(publicUrl, privateUrl, "");
+        }
 
-        return new Website(publicUrl, privateUrl, title, metaDescription, keywords, linksTo, visitors, created, rank);
+
+       
         
     }
 

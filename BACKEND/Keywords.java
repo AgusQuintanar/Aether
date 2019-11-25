@@ -41,7 +41,7 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
     }
 
     private void loadKeywordsFromWebsites(Index index) {
-      
+        try {
 
             for (Website websiteInKeyword : index.getWebsites()) { 
 
@@ -66,7 +66,10 @@ public class Keywords extends HashMap<String,LinkedList<Website>>{
                 }
                 
             }
-       
+        }
+        catch (NullPointerException npe) {
+            
+        }
         
     }
 
