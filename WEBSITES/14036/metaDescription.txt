@@ -1,0 +1,1 @@
+Really Simple Syndication (RSS) es una tecnología que permite que usted descargue los titulares de Elcomercio.com directamente a su computador, mediante un 'agregador de noticias', o leerlos a traves de un navegador web.

@@ -1,0 +1,1 @@
+Effectuer des réservations en ligne, lire les commentaires des clients et accumuler des points pour obtenir des repas gratuits. OpenTable est un réseau de réservation en temps réel pour les restaurants gastronomiques. 
