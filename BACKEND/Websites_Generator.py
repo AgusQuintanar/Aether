@@ -11,7 +11,7 @@ def create_website_files(count, url, metadata):
 
     with open(websites_path+str(count)+"/website.metadata", "w") as file:
         file.write("publicUrl!---!privateUrl!---!TITLE!---!KEYWORDS!---!LINKS_TO!---!CREATED!---!VISITORS!---!RANK\n")
-        file.write(url.strip().strip('\n')+'!---!'+url.strip().strip('\n')+'!---!'+metadata['title']+'!---!'+str(metadata['title']).strip().strip('\n')+
+        file.write(url.strip().strip('\n')+'!---!'+url.strip().strip('\n')+'!---!'+str(metadata['title']).strip('\n')+'!---!'+str(metadata['title']).strip().strip('\n')+
         ','+str(metadata['keywords']).strip().strip('\n')+'!---!'+str(metadata['outgoing_links']).strip().strip('\n')+'!---!'+
         datetime.date.today().strftime("%B %d, %Y")+'!---!'+str(0)+'!---!'+str(0.0))
         file.close()
