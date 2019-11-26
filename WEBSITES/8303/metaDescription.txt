@@ -1,0 +1,3 @@
+
+        Statistics for Wikimedia Projects: Wikipedia, Commons, Wikidata, Wikivoyage,
+        Wiktionary, Wikibooks, Wikinews, Wikiquote, Wikiversity
