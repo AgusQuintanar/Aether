@@ -1,0 +1,1 @@
+Cuando terminan en y, se cambia la y por i y se agrega la terminación -est. Easy, the easiest (fácil, el más fácil), Crazy, the craziest (loco, el más loco), Happy, the happiest (feliz, el más feliz), Ugly, the ugliest (feo, el más feo)

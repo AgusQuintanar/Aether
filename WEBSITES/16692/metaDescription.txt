@@ -1,0 +1,1 @@
+Buscador de cines por nombre, provincia, ciudad o código postal. Encuentra tu cine más cercano y disfruta de las películas de la semana

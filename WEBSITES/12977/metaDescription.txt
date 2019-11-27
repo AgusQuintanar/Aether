@@ -1,0 +1,1 @@
+L’application IdRef permet d’interroger les autorités des bases Calames, Sudoc, STAR, STEP et Thèses.fr, d'enrichir et/ou de corriger des notices autorités existantes, de créer, sur authentification, de nouvelles entités.
